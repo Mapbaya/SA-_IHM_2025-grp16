@@ -29,14 +29,14 @@ Création du Trello.
                 
 ## 10/06/25  
 Appli 1 :
-Création de l'interface principale
-Gestion de l'affichage du plan
-Gestion de la grille
-Gestion des actions souris, zoom et dézoom en respectant le format de la grille d'affichage
+Création de l'interface principale  
+Gestion de l'affichage du plan  
+Gestion de la grille  
+Gestion des actions souris, zoom et dézoom en respectant le format de la grille d'affichage  
 Réflexion commune sur :
-    le développement à venir de la fonction "mise en rayon"
-    le choix d'implémentation des listes de produits
-    l'organisation globale de l'application
+    * le développement à venir de la fonction "mise en rayon"
+    * le choix d'implémentation des listes de produits
+    * l'organisation globale de l'application
 
 
 
