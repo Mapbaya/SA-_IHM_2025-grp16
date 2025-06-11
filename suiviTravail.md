@@ -29,6 +29,7 @@ Création du Trello.
                 
 ## 10/06/25  
 **Appli 1** :
+
 • Création de l'interface principale  
 • Gestion de l'affichage du plan  
 • Gestion de la grille  
