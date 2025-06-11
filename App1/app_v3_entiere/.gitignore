@@ -1,0 +1,18 @@
+# Pour éviter les pycache
+__pycache__/
+*.py[cod]
+*$py.class 
+
+# Dossiers de données
+/data/
+/images/
+/img/
+
+# Environnement virtuel
+venv/
+env/
+.env/
+
+# Fichiers système
+.DS_Store
+Thumbs.db 
