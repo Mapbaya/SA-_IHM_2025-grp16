@@ -35,9 +35,11 @@ Création du Trello.
 • Gestion de la grille  
 • Gestion des actions souris, zoom et dézoom en respectant le format de la grille d'affichage  
 • Réflexion commune sur :
-    * le développement à venir de la fonction "mise en rayon"
-    * le choix d'implémentation des listes de produits
-    * l'organisation globale de l'application
+
+    le développement à venir de la fonction "mise en rayon"
+    
+     le choix d'implémentation des listes de produits
+    et  l'organisation globale de l'application
 
 
 
