@@ -5,11 +5,11 @@ Ce fichier contient les constantes et paramètres de configuration
 utilisés dans toute l'application.
 """
 
-import os
+import os, sys
 import json
 
 # Chemins des dossiers
-DOSSIER_PROJETS = 'App1/projets'
+DOSSIER_PROJETS = sys.path[0] +  '/projets'
 DOSSIER_DATA = 'data'
 DOSSIER_IMAGES = 'images'
 

@@ -72,9 +72,9 @@ class VueInteraction(QGraphicsView):
 
             # Référence façon échiquier (ex : A1, B3, AA2, etc.)
             
-            if (col < 26):
+            if (col < 26): # pour les lettres de A à Z
                 lettre_col = chr(ord('A') + col)
-            else:
+            else: # si plus de colonne que de lettres
                 lettre_col = 'A' + chr(ord('A') + col%26)
             
             ref = f"{lettre_col}{row + 1}"  # ligne 0 devient "1", etc.
