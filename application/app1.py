@@ -1,6 +1,6 @@
 import sys
 from PyQt6.QtWidgets import (
-    QApplication, QMainWindow, QWidget, QLabel, QPushButton, QComboBox,
+    QApplication, QMainWindow, QWidget, QLabel, QPushButton, QComboBox, QMessageBox,
     QVBoxLayout, QHBoxLayout, QCheckBox, QFrame, QSizePolicy
 )
 from PyQt6.QtCore import Qt
@@ -61,6 +61,21 @@ class Boutons(QWidget):
         layout.addWidget(self.create_btn)
         layout.addStretch()
         layout.setContentsMargins(0, 20, 0, 20)
+        self.cancel_btn.clicked.connect(self.cancel)
+
+    def cancel(self):
+        annuler = QMessageBox()
+        annuler.setWindowTitle("Annuler")
+        annuler.setText("Êtes-vous sûr d’annuler ?\nToutes modifications ne seront pas enregistrées.")
+        annuler.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+        annuler.setDefaultButton(QMessageBox.StandardButton.No)
+
+        annuler.button(QMessageBox.StandardButton.Yes).setText("Oui")
+        annuler.button(QMessageBox.StandardButton.No).setText("Non")
+
+        res = annuler.exec()
+        if res == QMessageBox.StandardButton.Yes:
+            QApplication.quit()
 
 
 class ShoppingListApp(QMainWindow):
@@ -89,6 +104,8 @@ class ShoppingListApp(QMainWindow):
 
         self.boutons = Boutons()
         main_layout.addWidget(self.boutons)
+
+
 
 
 if __name__ == "__main__":
