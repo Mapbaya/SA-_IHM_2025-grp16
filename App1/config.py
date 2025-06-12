@@ -9,7 +9,7 @@ import os
 import json
 
 # Chemins des dossiers
-DOSSIER_PROJETS = 'projets'
+DOSSIER_PROJETS = 'App1/projets'
 DOSSIER_DATA = 'data'
 DOSSIER_IMAGES = 'images'
 

@@ -195,14 +195,14 @@ class MainWindowAppli1(QMainWindow):
         Cette fonction permettra bientôt de choisir les produits
         à placer dans le magasin
         """
-        self.barre_etat.showMessage("La sélection des produits arrive bientôt !", 3000)
+        self.barreEtat.showMessage("La sélection des produits arrive bientôt !", 3000)
         
     def placer_produits(self):
         """
         Cette fonction permettra bientôt de placer les produits
         sur le plan du magasin
         """
-        self.barre_etat.showMessage("Le placement des produits arrive bientôt !", 3000)
+        self.barreEtat.showMessage("Le placement des produits arrive bientôt !", 3000)
         
     def retour_liste(self):
         """
