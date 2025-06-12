@@ -1,3 +1,4 @@
+
 """
 Mon super programme de gestion de magasin ! ^^
 
@@ -11,6 +12,8 @@ et j'espère que ça va aider plein de gens !
 """
 
 import sys
+
+
 import os
 from PyQt6.QtWidgets import (QApplication, QMainWindow, QWidget, 
                            QVBoxLayout, QPushButton, QLabel, QMessageBox)

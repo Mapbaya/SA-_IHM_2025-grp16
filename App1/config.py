@@ -5,7 +5,7 @@ Ce fichier contient les constantes et paramètres de configuration
 utilisés dans toute l'application.
 """
 
-import os
+import os, sys
 import json
 
 # Chemins des dossiers (utilisation de forward slashes pour la compatibilité)

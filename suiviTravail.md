@@ -51,6 +51,19 @@ Réflexion commune sur :
     * points IHM à mettre en place
 
 
+## 12/06/25  
+Appli 1 :  
+Restructuration et adéquation des versions précédentes entre elles  
+Correctionn des chemins de projets, de la barre d'état, de l'affichage des icônes  
+Ajouts de projets de tests  
+Création de l'affichage de la liste des produits dans le dock  
+Possibilité d'ajout et suppression de produits dans les cases  
+Gestion du fichier json avec les mises à jour produits  
+Création des listes de cases des rayons  
+Organisation du modele avec l'ajout du dictionnaire des cases et des listes utiles  
+
+
+
 
 
 
