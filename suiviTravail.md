@@ -56,7 +56,9 @@ Création du Trello.
     • Gestion des plans de magasin
 
 • Nouvelles fonctionnalités :
-
+    
+    • Séparation de la première partie du code selon le modèle MVC
+    • Gestion du paramétrage de la grille
     • Navigation entre les projets
     • Interface de création de projet
     • Système de confirmation pour la suppression
