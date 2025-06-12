@@ -1,0 +1,9 @@
+{
+    "nom": "testK",
+    "magasin": "Karouf",
+    "auteur": "KD",
+    "date_creation": "12/06/2025",
+    "chemin_plan": "projets\\testK\\plan.jpg",
+    "taille_quadrillage": 100,
+    "produits": []
+}
