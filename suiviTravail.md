@@ -39,6 +39,16 @@ Réflexion commune sur :
     * l'organisation globale de l'application
 
 
+                
+## 11/06/25  
+Appli 1 :  
+Passage de CISCO sur la matinée  
+Création des fenêtres secondaires (accès à l'appli, menu appli1)  
+Gestion du paramétrage de la grille  
+Séparation de la première partie selon modèle MVC
+Hiérarchisation du projet
+Réflexion commune sur :
+    * points IHM à mettre en place
 
 
 
