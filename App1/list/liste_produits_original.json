@@ -460,5 +460,33 @@
     "Graines",
     "Litière",
     "Pâtées"
+],
+"Électronique": [
+    "Smartphone",
+    "Tablette",
+    "Ordinateur portable",
+    "Casque audio",
+    "Enceinte bluetooth"
+],
+"Vêtements": [
+    "T-shirt",
+    "Pantalon",
+    "Robe",
+    "Chemise",
+    "Veste"
+],
+"Alimentation": [
+    "Pain",
+    "Lait",
+    "Fruits",
+    "Légumes",
+    "Viande"
+],
+"Maison": [
+    "Lampe",
+    "Table",
+    "Chaise",
+    "Lit",
+    "Armoire"
 ]
 }

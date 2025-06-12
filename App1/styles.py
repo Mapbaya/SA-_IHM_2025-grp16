@@ -15,6 +15,8 @@ COLORS = {
     'primary_dark': '#1565C0',  # Bleu foncé - États actifs et focus
     'accent': '#00BCD4',        # Cyan - Éléments d'accentuation
     'warning': '#FF5722',       # Orange - Alertes et actions critiques
+    'success': '#4CAF50',       # Vert - Actions réussies
+    'error': '#F44336',         # Rouge - Erreurs
     'background': '#FFFFFF',    # Blanc - Fond d'interface
     'surface': '#FFFFFF',       # Blanc - Surface des composants
     'text': '#000000',          # Noir - Texte principal
@@ -36,6 +38,30 @@ WINDOW_STYLE = f"""
         padding: 8px;
         font-weight: bold;
         font-size: 15px;
+    }}
+"""
+
+# Style des boîtes de dialogue
+DIALOG_STYLE = f"""
+    QDialog {{
+        background-color: {COLORS['background']};
+        min-width: 400px;
+    }}
+    QLabel {{
+        color: {COLORS['text']};
+        font-size: 16px;
+        padding: 8px;
+    }}
+    QGroupBox {{
+        border: 2px solid {COLORS['primary']};
+        border-radius: 6px;
+        margin-top: 12px;
+        padding: 12px;
+    }}
+    QGroupBox::title {{
+        color: {COLORS['primary']};
+        font-weight: bold;
+        padding: 0 8px;
     }}
 """
 
@@ -196,4 +222,20 @@ GRAPHICS_VIEW_STYLE = f"""
         border: 2px solid {COLORS['primary']};
         border-radius: 6px;
     }}
+"""
+
+# Style des messages d'erreur
+ERROR_STYLE = f"""
+    color: {COLORS['error']};
+    font-weight: bold;
+    font-size: 14px;
+    padding: 8px;
+"""
+
+# Style des messages de succès
+SUCCESS_STYLE = f"""
+    color: {COLORS['success']};
+    font-weight: bold;
+    font-size: 14px;
+    padding: 8px;
 """ 

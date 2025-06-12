@@ -1,0 +1,65 @@
+{
+    "nom": "eeeeee",
+    "magasin": "eeeee",
+    "auteur": "eee",
+    "date_creation": "12/06/2025",
+    "chemin_plan": "App1/projets/eeeeee/plan.jpg",
+    "taille_quadrillage": 100,
+    "produits": {
+        "T15": [
+            "Ail",
+            "Artichaut",
+            "Asperges",
+            "Avocat",
+            "Aubergine"
+        ],
+        "C8": [],
+        "F6": [
+            "Chou-rouge"
+        ],
+        "E7": [
+            "Barres chocolatées"
+        ],
+        "D19": [],
+        "C5": [],
+        "C4": [
+            "Ail",
+            "Artichaut",
+            "Asperges",
+            "Aubergine",
+            "Avocat"
+        ],
+        "G7": [],
+        "F7": [],
+        "I6": [
+            "Aubergine"
+        ],
+        "I5": [
+            "Avocat"
+        ],
+        "E5": [],
+        "I4": [],
+        "I9": [
+            "Ail",
+            "Artichaut",
+            "Asperges",
+            "Aubergine",
+            "Avocat"
+        ],
+        "AB20": [
+            "Anchois",
+            "Bolognaise",
+            "Compote"
+        ],
+        "V19": [
+            "Bigorneaux",
+            "Cabillaud",
+            "Colin",
+            "Coquille St-Jacques",
+            "Crabe",
+            "Bigorneaux",
+            "Cabillaud",
+            "Colin"
+        ]
+    }
+}

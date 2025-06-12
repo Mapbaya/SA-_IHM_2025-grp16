@@ -176,10 +176,8 @@ class MainApp1(QMainWindow):
         item = self.liste_projets.currentItem()
         if item:
             try:
-                projet = self.gestion_projet.charger_projet(item.text())
-                if not os.path.exists(projet['chemin_plan']):
-                    raise ValueError(f"Le fichier du plan est introuvable : {projet['chemin_plan']}")
-                self.vue_projet = MainWindowAppli1(projet, self)
+                self.gestion_projet.charger_projet(item.text())
+                self.vue_projet = MainWindowAppli1(self.gestion_projet, self)
                 self.vue_projet.show()
                 self.hide()
             except Exception as e:

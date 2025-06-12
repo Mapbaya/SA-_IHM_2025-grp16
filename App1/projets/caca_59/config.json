@@ -3,7 +3,25 @@
     "magasin": "intercaca",
     "auteur": "chayma",
     "date_creation": "10/06/2025",
-    "chemin_plan": "/home/mapba/Documents/testfred/projets/caca_59/plan.jpg",
+    "chemin_plan": "App1/projets/caca_59/plan.jpg",
     "taille_quadrillage": 150,
-    "produits": []
+    "produits": {
+        "C4": [],
+        "E4": [
+            "Ail",
+            "Artichaut",
+            "Asperges",
+            "Aubergine",
+            "Avocat"
+        ],
+        "E5": [
+            "Betterave"
+        ],
+        "E6": [
+            "Champignons"
+        ],
+        "G5": [
+            "Abricots secs"
+        ]
+    }
 }

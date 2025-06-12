@@ -1,0 +1,15 @@
+{
+    "nom": "zszd",
+    "magasin": "dzd",
+    "auteur": "zdzdzd",
+    "chemin_plan": "App1/projets/zszd/plan.jpg",
+    "produits": {
+        "V6": [
+            "Ail",
+            "Artichaut",
+            "Asperges",
+            "Aubergine",
+            "Avocat"
+        ]
+    }
+}

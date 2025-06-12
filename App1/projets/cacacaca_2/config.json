@@ -1,0 +1,15 @@
+{
+    "nom": "cacacaca_2",
+    "magasin": "cachan",
+    "auteur": "Miada",
+    "chemin_plan": "App1/projets/cacacaca_2/plan.jpg",
+    "produits": {
+        "A3": [
+            "Bigorneaux",
+            "Cabillaud",
+            "Colin",
+            "Coques",
+            "Coquille St-Jacques"
+        ]
+    }
+}

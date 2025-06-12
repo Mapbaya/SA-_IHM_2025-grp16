@@ -1,175 +1,207 @@
 """
-Gestionnaire de projets de magasin.
+Module de gestion des projets de magasin.
 
-Ce module constitue le cœur de l'application, gérant le cycle de vie complet
-des projets de magasin. Il assure :
-- La création sécurisée de nouveaux projets
-- Le chargement et la validation des projets existants
-- La gestion des ressources (plans, configurations)
-- La suppression sécurisée des projets
+Ce module gère les opérations suivantes :
+- Création de nouveaux projets
+- Sauvegarde des modifications
+- Chargement des projets existants
+- Suppression des projets
+
+Utilise un fichier config.json pour chaque projet
+afin d'assurer une organisation structurée des données.
 """
 
 import os
 import json
 import shutil
-from datetime import datetime
 from config import DOSSIER_PROJETS
 
 class GestionProjet:
     """
-    Gestionnaire central des projets de magasin.
+    Classe de gestion des projets de magasin.
     
-    Cette classe assure la gestion complète des projets, garantissant
-    l'intégrité des données et la cohérence des fichiers associés.
-    Elle maintient une structure organisée des projets et de leurs ressources.
+    Gère l'ensemble des opérations liées aux fichiers
+    et à la persistance des données.
     """
+    
     def __init__(self):
-        """
-        Initialise le gestionnaire de projets.
-        """
-        self.projet_courant = None
+        """Initialisation des variables de classe."""
+        self.projet_actuel = None
         
-    def creer_projet(self, nom, magasin, auteur, chemin_plan, taille_quadrillage=100):
+    def creer_projet(self, nom, magasin, auteur, plan):
         """
-        Crée un nouveau projet de magasin avec ses ressources associées.
+        Crée un nouveau projet avec les informations fournies.
         
-        Cette méthode :
-        1. Vérifie la disponibilité du nom de projet
-        2. Crée une structure de dossiers dédiée
-        3. Copie et organise les ressources nécessaires
-        4. Génère et sauvegarde la configuration initiale
-        
-        Args:
-            nom: Nom unique du projet
-            magasin: Nom du magasin
-            auteur: Nom de l'auteur du projet
-            chemin_plan: Chemin vers le fichier du plan
-            taille_quadrillage: Taille du quadrillage en pixels (défaut: 100)
+        Vérifie les conditions suivantes :
+        - Unicité du nom de projet
+        - Existence du fichier plan
+        - Présence de tous les champs requis
+        """
+        # Validation des champs requis
+        if not all([nom, magasin, auteur, plan]):
+            raise ValueError("Données incomplètes pour la création du projet")
             
-        Returns:
-            dict: Configuration complète du projet créé
+        # Validation du nom
+        nom = nom.strip()
+        if not nom:
+            raise ValueError("Le nom du projet est requis")
             
-        Raises:
-            ValueError: Si le nom de projet est déjà utilisé
-        """
-        # Vérification et création du dossier principal
-        if not os.path.exists(DOSSIER_PROJETS):
-            os.makedirs(DOSSIER_PROJETS)
-            
-        # Préparation du dossier projet
-        dossier_projet = os.path.join(DOSSIER_PROJETS, nom)
-        
-        # Vérification de l'unicité du nom
-        if os.path.exists(dossier_projet):
+        # Vérification de l'unicité du projet
+        mon_dossier = os.path.join(DOSSIER_PROJETS, nom)
+        if os.path.exists(mon_dossier):
             raise ValueError(f"Un projet nommé '{nom}' existe déjà")
             
-        # Création de la structure du projet
-        os.makedirs(dossier_projet)
+        # Vérification de l'existence du plan
+        if not os.path.isfile(plan):
+            raise ValueError(f"Le fichier plan spécifié est introuvable : {plan}")
+            
+        # Création du dossier projet
+        os.makedirs(mon_dossier)
         
-        # Copie et organisation des ressources
-        nom_fichier = os.path.basename(chemin_plan)
-        nouveau_chemin = os.path.join(dossier_projet, nom_fichier)
-        shutil.copy2(chemin_plan, nouveau_chemin)
+        # Copie du fichier plan avec chemin normalisé
+        extension = os.path.splitext(plan)[1]
+        mon_plan = os.path.join("App1", "projets", nom, f"plan{extension}")
+        mon_plan = os.path.normpath(mon_plan)
+        shutil.copy2(plan, mon_plan)
         
-        # Génération de la configuration initiale
-        config = {
-            'nom': nom,
-            'magasin': magasin,
-            'auteur': auteur,
-            'date_creation': datetime.now().strftime("%d/%m/%Y"),
-            'chemin_plan': nouveau_chemin,
-            'taille_quadrillage': taille_quadrillage,
-            'produits': []
+        # Conversion des backslashes en forward slashes pour la compatibilité
+        mon_plan = mon_plan.replace("\\", "/")
+        
+        # Configuration du projet
+        ma_config = {
+            "nom": nom,
+            "magasin": magasin,
+            "auteur": auteur,
+            "chemin_plan": mon_plan,
+            "produits": {}
         }
         
         # Sauvegarde de la configuration
-        chemin_config = os.path.join(dossier_projet, 'config.json')
-        with open(chemin_config, 'w') as f:
-            json.dump(config, f, indent=4)
+        mon_fichier = os.path.join(mon_dossier, "config.json")
+        with open(mon_fichier, "w", encoding="utf-8") as f:
+            json.dump(ma_config, f, indent=4, ensure_ascii=False)
             
-        return config
+        # Mise à jour du projet actuel
+        self.projet_actuel = ma_config
         
     def charger_projet(self, nom):
         """
-        Charge et valide un projet existant.
-        
-        Cette méthode :
-        1. Vérifie l'existence du projet
-        2. Valide l'intégrité des fichiers
-        3. Met à jour les anciens formats si nécessaire
-        4. Vérifie la présence des ressources requises
-        
-        Args:
-            nom: Nom du projet à charger
-            
-        Returns:
-            dict: Configuration complète du projet
-            
-        Raises:
-            ValueError: Si le projet est introuvable ou corrompu
+        Charge un projet existant.
+        Vérifie l'ensemble des données du projet.
         """
-        # Localisation du projet
-        dossier_projet = os.path.join(DOSSIER_PROJETS, nom)
-        
-        # Vérification de l'existence
-        if not os.path.exists(dossier_projet):
-            raise ValueError(f"Le projet '{nom}' n'existe pas")
+        # Vérification de l'existence du projet
+        mon_dossier = os.path.join(DOSSIER_PROJETS, nom)
+        if not os.path.isdir(mon_dossier):
+            raise ValueError(f"Le projet '{nom}' est introuvable")
             
         # Chargement de la configuration
-        chemin_config = os.path.join(dossier_projet, 'config.json')
+        mon_fichier = os.path.join(mon_dossier, "config.json")
+        try:
+            with open(mon_fichier, "r", encoding="utf-8") as f:
+                ma_config = json.load(f)
+        except Exception as e:
+            raise ValueError(f"Erreur lors du chargement de la configuration : {str(e)}")
+            
+        # Validation et normalisation de la structure
+        champs_requis = ["nom", "magasin", "auteur", "chemin_plan"]
+        if not all(champ in ma_config for champ in champs_requis):
+            raise ValueError("Configuration du projet invalide ou incomplète")
+            
+        # Normalisation du chemin du plan
+        ma_config["chemin_plan"] = os.path.normpath(ma_config["chemin_plan"]).replace("\\", "/")
         
-        if not os.path.exists(chemin_config):
-            raise ValueError(f"Le fichier de configuration du projet '{nom}' est manquant")
+        # Gestion de la compatibilité des produits
+        if "produits_par_case" in ma_config:
+            ma_config["produits"] = ma_config.pop("produits_par_case")
+        elif "produits" not in ma_config:
+            ma_config["produits"] = {}
+        elif isinstance(ma_config["produits"], list):
+            ma_config["produits"] = {}  # Conversion d'une liste vide en dictionnaire vide
             
-        # Lecture et validation
-        with open(chemin_config, 'r') as f:
-            config = json.load(f)
-            
-        # Migration des anciens formats
-        if 'plan' in config and 'chemin_plan' not in config:
-            config['chemin_plan'] = os.path.join(dossier_projet, config['plan'])
-            del config['plan']
-            with open(chemin_config, 'w') as f:
-                json.dump(config, f, indent=4)
-            
-        # Vérification des ressources
-        if not os.path.exists(config['chemin_plan']):
-            nom_fichier = os.path.basename(config['chemin_plan'])
-            nouveau_chemin = os.path.join(dossier_projet, nom_fichier)
-            if os.path.exists(nouveau_chemin):
-                config['chemin_plan'] = nouveau_chemin
-            else:
-                raise ValueError(f"Le fichier du plan est manquant: {config['chemin_plan']}")
-            
-        # Activation du projet
-        self.projet_courant = config
-        return config
+        # Mise à jour du projet actuel
+        self.projet_actuel = ma_config
+        return ma_config
         
     def supprimer_projet(self, nom):
         """
-        Supprime définitivement un projet et ses ressources.
-        
-        Cette méthode :
-        1. Vérifie l'existence du projet
-        2. Supprime l'ensemble des fichiers et dossiers associés
-        3. Met à jour l'état du gestionnaire si nécessaire
-        
-        Args:
-            nom: Nom du projet à supprimer
-            
-        Raises:
-            ValueError: Si le projet est introuvable
+        Supprime un projet et ses fichiers associés.
+        Cette opération est irréversible.
         """
-        # Localisation du projet
-        dossier_projet = os.path.join(DOSSIER_PROJETS, nom)
-        
-        # Vérification de l'existence
-        if not os.path.exists(dossier_projet):
-            raise ValueError(f"Le projet '{nom}' n'existe pas")
+        mon_dossier = os.path.join(DOSSIER_PROJETS, nom)
+        if not os.path.isdir(mon_dossier):
+            raise ValueError(f"Le projet '{nom}' est introuvable")
             
-        # Suppression des ressources
-        shutil.rmtree(dossier_projet)
+        # Suppression du dossier projet
+        try:
+            shutil.rmtree(mon_dossier)
+        except Exception as e:
+            raise ValueError(f"Erreur lors de la suppression : {str(e)}")
+            
+        # Réinitialisation du projet actuel si nécessaire
+        if self.projet_actuel and self.projet_actuel["nom"] == nom:
+            self.projet_actuel = None
+            
+    def sauvegarder(self):
+        """
+        Sauvegarde les modifications du projet actuel.
+        """
+        if not self.projet_actuel:
+            raise ValueError("Aucun projet actif à sauvegarder")
+            
+        # Sauvegarde de la configuration
+        mon_dossier = os.path.join(DOSSIER_PROJETS, self.projet_actuel["nom"])
+        mon_fichier = os.path.join(mon_dossier, "config.json")
         
-        # Mise à jour de l'état
-        if self.projet_courant and self.projet_courant['nom'] == nom:
-            self.projet_courant = None 
+        try:
+            with open(mon_fichier, "w", encoding="utf-8") as f:
+                json.dump(self.projet_actuel, f, indent=4, ensure_ascii=False)
+        except Exception as e:
+            raise ValueError(f"Erreur lors de la sauvegarde : {str(e)}")
+            
+    def obtenir_produits_case(self, case):
+        """
+        Récupère la liste des produits d'une case donnée.
+        """
+        if not self.projet_actuel:
+            return []
+            
+        return self.projet_actuel["produits"].get(case, [])
+        
+    def definir_produits_case(self, case, produits):
+        """
+        Met à jour la liste des produits d'une case.
+        """
+        if not self.projet_actuel:
+            raise ValueError("Aucun projet actif")
+            
+        if produits:
+            self.projet_actuel["produits"][case] = produits
+        elif case in self.projet_actuel["produits"]:
+            del self.projet_actuel["produits"][case]
+            
+        self.sauvegarder()
+        
+    def obtenir_tous_produits_places(self):
+        """
+        Retourne la liste complète des produits placés
+        sur le plan.
+        """
+        if not self.projet_actuel:
+            return []
+            
+        tous_produits = []
+        for produits in self.projet_actuel["produits"].values():
+            tous_produits.extend(produits)
+        return tous_produits
+        
+    def trouver_case_produit(self, produit):
+        """
+        Recherche la case contenant un produit donné.
+        """
+        if not self.projet_actuel:
+            return None
+            
+        for case, produits in self.projet_actuel["produits"].items():
+            if produit in produits:
+                return case
+        return None 

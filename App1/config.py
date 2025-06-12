@@ -8,10 +8,10 @@ utilisés dans toute l'application.
 import os
 import json
 
-# Chemins des dossiers
+# Chemins des dossiers (utilisation de forward slashes pour la compatibilité)
 DOSSIER_PROJETS = 'App1/projets'
-DOSSIER_DATA = 'data'
-DOSSIER_IMAGES = 'images'
+DOSSIER_DATA = 'App1/data'
+DOSSIER_IMAGES = 'App1/img'
 
 # Fichiers partagés
 FICHIER_PRODUITS = os.path.join(DOSSIER_DATA, "produits.json")
@@ -26,13 +26,20 @@ def creer_dossier_si_necessaire(chemin):
         return True
     return False
 
+def normaliser_chemin(chemin):
+    """
+    Normalise un chemin pour qu'il soit compatible avec tous les systèmes d'exploitation.
+    """
+    return os.path.normpath(chemin).replace("\\", "/")
+
 def obtenir_chemin_data(nom_fichier):
     """
     Retourne le chemin complet d'un fichier dans le dossier data.
     Crée le dossier data si nécessaire.
     """
     creer_dossier_si_necessaire(DOSSIER_DATA)
-    return os.path.join(DOSSIER_DATA, nom_fichier)
+    chemin = os.path.join(DOSSIER_DATA, nom_fichier)
+    return normaliser_chemin(chemin)
 
 def obtenir_chemin_image(nom_fichier):
     """
@@ -40,7 +47,8 @@ def obtenir_chemin_image(nom_fichier):
     Crée le dossier images si nécessaire.
     """
     creer_dossier_si_necessaire(DOSSIER_IMAGES)
-    return os.path.join(DOSSIER_IMAGES, nom_fichier)
+    chemin = os.path.join(DOSSIER_IMAGES, nom_fichier)
+    return normaliser_chemin(chemin)
 
 def obtenir_chemin_projet(nom_projet):
     """
@@ -48,7 +56,8 @@ def obtenir_chemin_projet(nom_projet):
     Crée le dossier projets si nécessaire.
     """
     creer_dossier_si_necessaire(DOSSIER_PROJETS)
-    return os.path.join(DOSSIER_PROJETS, nom_projet)
+    chemin = os.path.join(DOSSIER_PROJETS, nom_projet)
+    return normaliser_chemin(chemin)
 
 # Configuration de l'interface
 TAILLE_QUADRILLAGE_MIN = 50

@@ -1,170 +1,182 @@
 """
-Cette fenêtre permet de créer un nouveau projet de magasin.
-Elle demande à l'utilisateur toutes les infos nécessaires comme
-le nom du projet, le magasin concerné, qui fait le projet, etc.
+Interface de création d'un nouveau projet de magasin.
+
+Cette interface collecte :
+- Le nom du projet
+- Le nom du magasin
+- Le nom de l'auteur
+- Le fichier du plan
 """
 
-# On importe tout ce qu'il faut pour faire une belle interface graphique ^^
-from PyQt6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout,
-                           QLabel, QLineEdit, QPushButton, QFileDialog,
-                           QMessageBox, QSpinBox)
+from PyQt6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, 
+                           QPushButton, QFileDialog, QMessageBox)
 from PyQt6.QtCore import Qt
-import os
-# On va chercher le dossier où tous les projets sont rangés
-from config import DOSSIER_PROJETS
-# On importe notre gestionnaire de projets 
 from controleurs.gestion_projet import GestionProjet
-from styles import (WINDOW_STYLE, BUTTON_STYLE, BUTTON_SECONDARY_STYLE,
+from styles import (DIALOG_STYLE, BUTTON_STYLE, BUTTON_SECONDARY_STYLE,
                         INPUT_STYLE, FIELD_LABEL_STYLE)
 
 class DialogueCreationProjet(QDialog):
     """
-    La fenêtre principale pour créer un nouveau projet.
-    C'est ici que l'utilisateur va remplir toutes les infos.
+    Interface de dialogue pour la création d'un nouveau projet.
+    
+    Collecte et valide l'ensemble des informations nécessaires
+    à l'initialisation d'un nouveau projet de magasin.
     """
+    
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setWindowTitle("Nouveau Projet")
-        self.setModal(True)  # On force l'utilisateur à finir cette fenêtre avant de faire autre chose
-        self.gestion_projet = GestionProjet()
+        self.setWindowTitle("Nouveau projet")
         
-        # Applique le style global
-        self.setStyleSheet(WINDOW_STYLE)
+        # Application du style
+        self.setStyleSheet(DIALOG_STYLE)
         
-        self.init_ui()
+        # Initialisation du gestionnaire
+        self.mon_projet = GestionProjet()
         
-    def init_ui(self):
+        # Configuration de l'interface
+        self.initialiser_interface()
+        
+    def initialiser_interface(self):
         """
-        Crée toute l'interface graphique avec les champs à remplir.
-        Organisé propremement avec des layouts.
+        Configure l'interface utilisateur avec les champs de saisie
+        et les boutons de validation.
         """
-        layout = QVBoxLayout(self)
-        layout.setSpacing(15)
-        layout.setContentsMargins(20, 20, 20, 20)
+        # Configuration de la mise en page
+        mon_layout = QVBoxLayout(self)
+        mon_layout.setSpacing(15)
         
-        # --- Zone pour le nom du projet ---
-        layout_nom = QHBoxLayout()
-        label_nom = QLabel("Nom du projet:")
-        label_nom.setStyleSheet(FIELD_LABEL_STYLE)
-        self.input_nom = QLineEdit()
-        self.input_nom.setStyleSheet(INPUT_STYLE)
-        layout_nom.addWidget(label_nom)
-        layout_nom.addWidget(self.input_nom)
-        layout.addLayout(layout_nom)
+        # Configuration des champs
+        self.configurer_champ_nom(mon_layout)
+        self.configurer_champ_magasin(mon_layout)
+        self.configurer_champ_auteur(mon_layout)
+        self.configurer_champ_plan(mon_layout)
         
-        # --- Zone pour le nom du magasin ---
-        layout_magasin = QHBoxLayout()
-        label_magasin = QLabel("Magasin:")
-        label_magasin.setStyleSheet(FIELD_LABEL_STYLE)
-        self.input_magasin = QLineEdit()
-        self.input_magasin.setStyleSheet(INPUT_STYLE)
-        layout_magasin.addWidget(label_magasin)
-        layout_magasin.addWidget(self.input_magasin)
-        layout.addLayout(layout_magasin)
+        # Configuration des boutons
+        self.configurer_boutons(mon_layout)
         
-        # --- Zone pour l'auteur du projet ---
-        layout_auteur = QHBoxLayout()
-        label_auteur = QLabel("Auteur:")
-        label_auteur.setStyleSheet(FIELD_LABEL_STYLE)
-        self.input_auteur = QLineEdit()
-        self.input_auteur.setStyleSheet(INPUT_STYLE)
-        layout_auteur.addWidget(label_auteur)
-        layout_auteur.addWidget(self.input_auteur)
-        layout.addLayout(layout_auteur)
+    def configurer_champ_nom(self, mon_layout):
+        """
+        Configure le champ de saisie du nom du projet.
+        """
+        mon_label = QLabel("Nom du projet :")
+        mon_label.setStyleSheet(FIELD_LABEL_STYLE)
+        mon_layout.addWidget(mon_label)
         
-        # --- Zone pour choisir le plan du magasin ---
+        self.mon_nom = QLineEdit()
+        self.mon_nom.setStyleSheet(INPUT_STYLE)
+        self.mon_nom.setPlaceholderText("Par exemple : Magasin Centre-ville")
+        mon_layout.addWidget(self.mon_nom)
+        
+    def configurer_champ_magasin(self, mon_layout):
+        """
+        Configure le champ de saisie du nom du magasin.
+        """
+        mon_label = QLabel("Nom du magasin :")
+        mon_label.setStyleSheet(FIELD_LABEL_STYLE)
+        mon_layout.addWidget(mon_label)
+        
+        self.mon_magasin = QLineEdit()
+        self.mon_magasin.setStyleSheet(INPUT_STYLE)
+        self.mon_magasin.setPlaceholderText("Par exemple : Carrefour")
+        mon_layout.addWidget(self.mon_magasin)
+        
+    def configurer_champ_auteur(self, mon_layout):
+        """
+        Configure le champ de saisie du nom de l'auteur.
+        """
+        mon_label = QLabel("Votre nom :")
+        mon_label.setStyleSheet(FIELD_LABEL_STYLE)
+        mon_layout.addWidget(mon_label)
+        
+        self.mon_auteur = QLineEdit()
+        self.mon_auteur.setStyleSheet(INPUT_STYLE)
+        self.mon_auteur.setPlaceholderText("Par exemple : Marie")
+        mon_layout.addWidget(self.mon_auteur)
+        
+    def configurer_champ_plan(self, mon_layout):
+        """
+        Configure le champ de sélection du fichier plan.
+        """
+        mon_label = QLabel("Plan du magasin :")
+        mon_label.setStyleSheet(FIELD_LABEL_STYLE)
+        mon_layout.addWidget(mon_label)
+        
+        # Configuration du layout horizontal
         layout_plan = QHBoxLayout()
-        label_plan = QLabel("Plan:")
-        label_plan.setStyleSheet(FIELD_LABEL_STYLE)
-        self.input_plan = QLineEdit()
-        self.input_plan.setStyleSheet(INPUT_STYLE)
-        self.input_plan.setReadOnly(True)  # L'utilisateur ne peut pas écrire directement, il doit utiliser le bouton
-        btn_parcourir = QPushButton("Parcourir...")
-        btn_parcourir.setStyleSheet(BUTTON_STYLE)
-        btn_parcourir.clicked.connect(self.selectionner_plan)
-        layout_plan.addWidget(label_plan)
-        layout_plan.addWidget(self.input_plan)
-        layout_plan.addWidget(btn_parcourir)
-        layout.addLayout(layout_plan)
         
-        # --- Zone pour définir la taille du quadrillage ---
-        layout_quadrillage = QHBoxLayout()
-        label_quadrillage = QLabel("Taille du quadrillage (pixels):")
-        label_quadrillage.setStyleSheet(FIELD_LABEL_STYLE)
-        self.input_quadrillage = QSpinBox()
-        # On limite entre 50 et 200 pixels pour rester raisonnable
-        self.input_quadrillage.setRange(50, 200)
-        self.input_quadrillage.setValue(100)  # Valeur par défaut qui marche bien
-        self.input_quadrillage.setSingleStep(10)  # On avance de 10 en 10
-        self.input_quadrillage.setStyleSheet(INPUT_STYLE)
-        layout_quadrillage.addWidget(label_quadrillage)
-        layout_quadrillage.addWidget(self.input_quadrillage)
-        layout.addLayout(layout_quadrillage)
+        self.mon_plan = QLineEdit()
+        self.mon_plan.setStyleSheet(INPUT_STYLE)
+        self.mon_plan.setPlaceholderText("Choisissez une image PNG ou JPEG")
+        self.mon_plan.setReadOnly(True)
+        layout_plan.addWidget(self.mon_plan)
         
-        # --- Les boutons en bas de la fenêtre ---
+        mon_bouton_plan = QPushButton("Parcourir...")
+        mon_bouton_plan.setStyleSheet(BUTTON_SECONDARY_STYLE)
+        mon_bouton_plan.clicked.connect(self.selectionner_plan)
+        layout_plan.addWidget(mon_bouton_plan)
+        
+        mon_layout.addLayout(layout_plan)
+        
+    def configurer_boutons(self, mon_layout):
+        """
+        Configure les boutons de validation et d'annulation.
+        """
         layout_boutons = QHBoxLayout()
-        layout_boutons.setAlignment(Qt.AlignmentFlag.AlignRight)
-        layout_boutons.setSpacing(10)
         
-        # Bouton pour annuler et fermer la fenêtre
-        btn_annuler = QPushButton("Annuler")
-        btn_annuler.setStyleSheet(BUTTON_SECONDARY_STYLE)
-        btn_annuler.clicked.connect(self.reject)
+        mon_bouton_creer = QPushButton("Créer le projet")
+        mon_bouton_creer.setStyleSheet(BUTTON_STYLE)
+        mon_bouton_creer.clicked.connect(self.creer_projet)
+        layout_boutons.addWidget(mon_bouton_creer)
         
-        # Bouton pour créer le projet une fois qu'on a tout rempli
-        btn_creer = QPushButton("Créer")
-        btn_creer.setStyleSheet(BUTTON_STYLE)
-        btn_creer.clicked.connect(self.creer_projet)
-        btn_creer.setDefault(True)  # C'est le bouton par défaut quand on appuie sur Entrée
+        mon_bouton_annuler = QPushButton("Annuler")
+        mon_bouton_annuler.setStyleSheet(BUTTON_SECONDARY_STYLE)
+        mon_bouton_annuler.clicked.connect(self.reject)
+        layout_boutons.addWidget(mon_bouton_annuler)
         
-        layout_boutons.addWidget(btn_annuler)
-        layout_boutons.addWidget(btn_creer)
-        layout.addLayout(layout_boutons)
-        
-        # On s'assure que la fenêtre est assez large pour tout afficher
-        self.setMinimumWidth(600)
+        mon_layout.addLayout(layout_boutons)
         
     def selectionner_plan(self):
         """
-        Ouvre une fenêtre pour choisir le fichier du plan du magasin.
-        On accepte les images PNG et JPEG..
+        Ouvre une boîte de dialogue pour sélectionner le fichier plan.
+        Accepte les formats PNG et JPEG.
         """
-        fichier, _ = QFileDialog.getOpenFileName(
+        mon_fichier, _ = QFileDialog.getOpenFileName(
             self,
-            "Sélectionner le plan du magasin",
+            "Choisir le plan du magasin",
             "",
             "Images (*.png *.jpg *.jpeg);;Tous les fichiers (*.*)"
         )
-        if fichier:
-            self.input_plan.setText(fichier)
+        if mon_fichier:
+            self.mon_plan.setText(mon_fichier)
             
     def creer_projet(self):
         """
-        On récupère toutes les infos
-        saisies par l'utilisateur et on crée le projet.
+        Valide les informations saisies et crée le nouveau projet.
         """
-        # On récupère tout ce que l'utilisateur a saisi
-        nom = self.input_nom.text().strip()
-        magasin = self.input_magasin.text().strip()
-        auteur = self.input_auteur.text().strip()
-        plan = self.input_plan.text().strip()
-        taille_quadrillage = self.input_quadrillage.value()
+        # Récupération des données
+        nom = self.mon_nom.text().strip()
+        magasin = self.mon_magasin.text().strip()
+        auteur = self.mon_auteur.text().strip()
+        plan = self.mon_plan.text().strip()
         
-        # On vérifie que l'utilisateur n'a rien oublié
+        # Validation des champs requis
         if not all([nom, magasin, auteur, plan]):
             QMessageBox.warning(
                 self,
-                "Champs manquants",
+                "Erreur de saisie",
                 "Tous les champs sont obligatoires."
             )
             return
             
-        # On essaie de créer le projet
+        # Création du projet
         try:
-            self.gestion_projet.creer_projet(
-                nom, magasin, auteur, plan, taille_quadrillage
+            self.mon_projet.creer_projet(
+                nom, magasin, auteur, plan
             )
-            self.accept()  # Tout s'est bien passé, on ferme la fenêtre
+            self.accept()
         except Exception as e:
-            # Ou uelque chose s'est mal passé, on prévient l'utilisateur
-            QMessageBox.critical(self, "Erreur", str(e)) 
+            QMessageBox.critical(
+                self,
+                "Erreur",
+                f"Impossible de créer le projet : {str(e)}"
+            ) 
