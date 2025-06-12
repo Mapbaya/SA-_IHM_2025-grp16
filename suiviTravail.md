@@ -63,7 +63,30 @@ Création du Trello.
     • Affichage des informations du projet (nom, magasin, auteur)
 
 
+## 12/06/2025
+**Appli 1**:
+• Liste des produits (format JSON) :
 
+    • Affichage des produits disponibles
+    • Filtrage des produits déjà utilisés
+    • Limite de 5 produits par case
+    
+• Placement des produits :
+
+    • Possibilité de placer les produits dans les cases
+    • Sauvegarde automatique des placements (dans le fichier de sauvegarde du projet)
+    • Affichage des produits déjà placés
+    
+• Amélioration UX :
+
+    • Style modifié pour une meilleure lisibilité
+    • Interface plus intuitive
+    • Meilleure organisation visuelle
+
+Gestion des erreurs :
+
+    • Messages d'erreur explicites
+    • Validation des actions
 
 
 
