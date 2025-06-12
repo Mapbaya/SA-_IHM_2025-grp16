@@ -63,7 +63,6 @@ class ListeMagasins(QWidget):
             QMessageBox.warning(self, "Erreur", f"Impossible d'ouvrir le fichier : {e}")
 
     def revenir_en_arriere(self):
-        # Ici tu peux rouvrir la fenêtre précédente ou faire ce que tu veux
         QMessageBox.information(self, "Retour", "Retour à la page précédente (à adapter selon ton application).")
         self.close()
 
