@@ -44,16 +44,19 @@ Création du Trello.
 **Appli 1** :
 
 • Implémentation complète de la gestion des projets :
+
     • Création de nouveaux projets
     • Ouverture des projets existants
     • Suppression de projets
     • Sauvegarde automatique des configurations
 
 • Structure de données des projets :
+
     • Configuration JSON pour chaque projet
     • Gestion des plans de magasin
 
 • Nouvelles fonctionnalités :
+
     • Navigation entre les projets
     • Interface de création de projet
     • Système de confirmation pour la suppression
