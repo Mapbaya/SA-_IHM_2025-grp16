@@ -65,6 +65,7 @@ Création du Trello.
 
 ## 12/06/2025
 **Appli 1**:
+
 • Liste des produits (format JSON) :
 
     • Affichage des produits disponibles
