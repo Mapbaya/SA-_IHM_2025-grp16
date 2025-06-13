@@ -1,0 +1,34 @@
+{
+    "Légumes": [
+        "Artichaut",
+        "Asperges",
+        "Céleri",
+        "Courgette"
+    ],
+    "Petit déjeuner": [
+        "Barres chocolatées",
+        "Biscottes",
+        "Biscuite",
+        "Brioche",
+        "Cacao",
+        "Café moulu",
+        "Café soluble",
+        "Céréales",
+        "Chicorée",
+        "Confiture",
+        "Crêpes",
+        "Croissants",
+        "Dosettes de café",
+        "Gaufres",
+        "Madeleines",
+        "Miel",
+        "Muffins",
+        "Pain au chocolat",
+        "Pain d'épice",
+        "Pancakes",
+        "Pâte à tartiner",
+        "Quatre quart",
+        "Thé",
+        "Tisane"
+    ]
+}
