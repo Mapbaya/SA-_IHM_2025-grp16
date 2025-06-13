@@ -10,6 +10,27 @@
             "Colin",
             "Coques",
             "Coquille St-Jacques"
+        ],
+        "Z8": [
+            "Beurre",
+            "Boisson lactée",
+            "Crème dessert",
+            "Crème fraîche",
+            "Fromage blanc"
+        ],
+        "Z19": [
+            "Allume barbecue",
+            "Anticalcaire",
+            "Cure dents",
+            "Détachant",
+            "Eau de javel"
+        ],
+        "AA10": [
+            "Abricots secs",
+            "Amandes",
+            "Beurre de cacahuète",
+            "Cassonade",
+            "Citron confits"
         ]
     }
 }

@@ -15,6 +15,12 @@
         "Z20": [
             "Smartphone",
             "Ordinateur portable"
+        ],
+        "V2": [
+            "Beurre",
+            "Boisson lactée",
+            "Crème fraîche",
+            "Fromage blanc"
         ]
     }
 }

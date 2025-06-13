@@ -13,6 +13,7 @@ from PyQt6.QtGui import QPixmap, QPen, QColor, QBrush, QPainter
 from constantes import Constantes
 from PyQt6.QtCore import pyqtSignal, Qt, QRectF
 from styles import GRAPHICS_VIEW_STYLE
+from PyQt6.QtWidgets import QAbstractScrollArea
 
 
 class ScenePlan(QGraphicsScene):
@@ -110,30 +111,63 @@ class ScenePlan(QGraphicsScene):
 class VuePlan(QGraphicsView):
     """
     Vue pour afficher et interagir avec le plan du magasin.
+    Gère aussi le zoom à la molette et le déplacement (drag) si activé.
     """
     def __init__(self, chemin_plan, parent=None):
         super().__init__(parent)
-        
-        # Configuration de base sans zoom
         self.setRenderHint(QPainter.RenderHint.Antialiasing)
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
-        
-        # Désactiver le zoom automatique
         self.setTransformationAnchor(QGraphicsView.ViewportAnchor.NoAnchor)
         self.setResizeAnchor(QGraphicsView.ViewportAnchor.NoAnchor)
-        
-        # Créer et configurer la scène
         self.scene_plan = ScenePlan(chemin_plan)
         self.setScene(self.scene_plan)
-        
-        # Ajuster la vue pour voir tout le plan sans zoom
-        self.resetTransform()  # Réinitialiser toute transformation
-        self.ensureVisible(self.scene_plan.sceneRect())  # S'assurer que tout est visible
-
-    def resizeEvent(self, event):
-        """Appelé quand la fenêtre est redimensionnée"""
-        super().resizeEvent(event)
-        # Réajuster la vue sans zoom
         self.resetTransform()
         self.ensureVisible(self.scene_plan.sceneRect())
+        self.set_vue_generale(True)
+
+    def set_vue_generale(self, active=True):
+        self.vue_generale_active = active
+        if active:
+            self.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+            self.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+            self.setDragMode(QGraphicsView.DragMode.NoDrag)
+            self.resetTransform()
+            self.fitInView(self.scene_plan.sceneRect(), Qt.AspectRatioMode.KeepAspectRatio)
+        else:
+            self.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+            self.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+            self.setDragMode(QGraphicsView.DragMode.ScrollHandDrag)
+        self.viewport().update()
+
+    def resizeEvent(self, event):
+        super().resizeEvent(event)
+        if hasattr(self, 'vue_generale_active') and self.vue_generale_active:
+            self.fitInView(self.scene_plan.sceneRect(), Qt.AspectRatioMode.KeepAspectRatio)
+
+    def wheelEvent(self, event):
+        if hasattr(self, 'vue_generale_active') and not self.vue_generale_active:
+            zoom_in_factor = 1.25
+            zoom_out_factor = 1 / zoom_in_factor
+            old_pos = self.mapToScene(event.position().toPoint())
+            if event.angleDelta().y() > 0:
+                self.scale(zoom_in_factor, zoom_in_factor)
+            else:
+                self.scale(zoom_out_factor, zoom_out_factor)
+            new_pos = self.mapToScene(event.position().toPoint())
+            delta = new_pos - old_pos
+            self.translate(delta.x(), delta.y())
+        else:
+            super().wheelEvent(event)
+
+    def keyPressEvent(self, event):
+        if hasattr(self, 'vue_generale_active') and not self.vue_generale_active:
+            zoom_factor = 1.1
+            if event.key() in (Qt.Key_Plus, Qt.Key_Equal):
+                self.scale(zoom_factor, zoom_factor)
+            elif event.key() == Qt.Key_Minus:
+                self.scale(1 / zoom_factor, 1 / zoom_factor)
+            else:
+                super().keyPressEvent(event)
+        else:
+            super().keyPressEvent(event)

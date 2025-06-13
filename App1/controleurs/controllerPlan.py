@@ -36,7 +36,86 @@ class PlanController:
         self.vue = vue
         self.chemin_courant = None
         self.connecter_signaux()
+class ControllerPlan:
+    """
+    Contrôleur pour gérer les actions sur le plan.
+    """
+
+    def __init__(self, modele, vue):
+        """
+        Initialise le contrôleur avec son modèle et sa vue.
         
+        Args:
+            modele: Le modèle de données du plan
+            vue: La vue qui affiche le plan
+        """
+        self.modele = modele
+        self.vue = vue
+        self.chemin_courant = None
+        self.connecter_signaux()
+
+    def connecter_signaux(self):
+        """
+        Connecte les signaux de la vue aux méthodes du contrôleur.
+        """
+        self.vue.signalNouveauProjet.connect(self.nouveau)
+        self.vue.signalOuvrirProjet.connect(self.ouvrir)
+        self.vue.signalEnregistrerProjet.connect(self.enregistrer)
+        self.vue.signalInitZoom.connect(self.init_zoom)
+
+    def nouveau(self):
+        """
+        Crée un nouveau projet avec un plan vierge.
+        Demande à l'utilisateur de choisir une image de plan.
+        """
+        self.vue.statusBar().showMessage('Création d\'un nouveau projet...', 2000)
+        
+        # Filtre pour les images
+        filtres = "Images (*.png *.jpg *.jpeg);;Tous les fichiers (*.*)"
+        
+        # Ouverture de la boîte de dialogue
+        chemin, _ = QFileDialog.getOpenFileName(
+            self.vue,
+            "Choisir une image de plan",
+            "",
+            filtres
+        )
+        
+        if chemin:
+            try:
+                # Vérification de l'extension
+                _, ext = os.path.splitext(chemin)
+                if ext.lower() not in ['.png', '.jpg', '.jpeg']:
+                    raise ValueError("Le fichier sélectionné n'est pas une image valide.")
+                
+                # Charger l'image ou effectuer une autre action
+                self.chemin_courant = chemin
+                self.vue.statusBar().showMessage(f"Projet créé avec l'image : {chemin}", 2000)
+            except Exception as e:
+                self.vue.statusBar().showMessage(f"Erreur : {str(e)}", 2000)
+        else:
+            self.vue.statusBar().showMessage("Aucun fichier sélectionné.", 2000)
+
+    def ouvrir(self):
+        """
+        Ouvre un projet existant.
+        """
+        self.vue.statusBar().showMessage('Ouverture d\'un projet existant...', 2000)
+        # Implémentation à ajouter
+
+    def enregistrer(self):
+        """
+        Enregistre le projet actuel.
+        """
+        self.vue.statusBar().showMessage('Enregistrement du projet...', 2000)
+        # Implémentation à ajouter
+
+    def init_zoom(self):
+        """
+        Initialise le zoom pour afficher tout le plan.
+        """
+        self.vue.statusBar().showMessage('Initialisation du zoom...', 2000)
+        self.vue.afficher_vue_d_ensemble()
     def connecter_signaux(self):
         """
         Connecte les signaux de la vue aux méthodes du contrôleur.
@@ -45,7 +124,7 @@ class PlanController:
         self.vue.signalOuvrirProjet.connect(self.ouvrir)
         self.vue.signalEnregistrerProjet.connect(self.enregistrer)
         self.vue.signalInitZoom.connect(self.initZoom)
-        
+
     def nouveau(self):
         """
         Crée un nouveau projet avec un plan vierge.
@@ -163,7 +242,7 @@ class PlanController:
         """
         Réinitialise le zoom pour afficher le plan entier.
         """
-        self.vue.view_scene.setTransform(QTransform())
+        self.vue.view_scene.setTransform(QTransform()) 
         self.vue.view_scene.fitInView(
             self.vue.scene.sceneRect(),
             Qt.AspectRatioMode.KeepAspectRatio

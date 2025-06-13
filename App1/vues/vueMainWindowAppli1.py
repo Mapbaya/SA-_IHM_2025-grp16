@@ -12,6 +12,7 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QPixmap, QIcon, QAction
 from vues.vueScenePlan import VuePlan, ScenePlan
 from vues.selection_produits import SelectionProduits
+from vues.vueListeProduits import VueListeProduits
 from constantes import Constantes
 from styles import WINDOW_STYLE, BUTTON_STYLE, BUTTON_SECONDARY_STYLE, TITLE_LABEL_STYLE
 
@@ -87,6 +88,18 @@ class MainWindowAppli1(QMainWindow):
         action_quitter.triggered.connect(self.retourner_liste)
         menuFichier.addAction(action_quitter)
 
+        # Ajout de l'action Vue générale dans Affichage
+        action_vue_generale = QAction("Vue générale", self)
+        action_vue_generale.setShortcut("Ctrl+0")
+        action_vue_generale.triggered.connect(lambda: self.ma_vue_plan.set_vue_generale(True))
+        menuAffichage.addAction(action_vue_generale)
+
+        # Ajout de l'action Activer le zoom dans Affichage
+        action_zoom = QAction("Activer le zoom", self)
+        action_zoom.setShortcut("Ctrl+Z")
+        action_zoom.triggered.connect(lambda: self.ma_vue_plan.set_vue_generale(False))
+        menuAffichage.addAction(action_zoom)
+
 #F
     def initialiser_toolbar(self):
         toolbar = QToolBar("Outils rapides")
@@ -102,6 +115,12 @@ class MainWindowAppli1(QMainWindow):
         action_retour.setToolTip("Retour")
         action_retour.triggered.connect(self.retourner_liste)
         toolbar.addAction(action_retour)
+
+        # Ajout du bouton pour afficher la liste des produits
+        action_liste = QAction(QIcon(os.path.join(Constantes.CHEMIN_ICONES, 'list.png')), 'Liste des produits', self)
+        action_liste.setToolTip("Afficher la liste des produits")
+        action_liste.triggered.connect(self.afficher_liste_produits)
+        toolbar.addAction(action_liste)
 
 #F
     def ajouter_raccourcis(self):
@@ -156,6 +175,7 @@ class MainWindowAppli1(QMainWindow):
         # Vue du plan (partie droite)
         self.ma_vue_plan = VuePlan(self.gestion_projet.projet_actuel['chemin_plan'])
         self.ma_vue_plan.scene_plan.case_selectionnee.connect(self.actualiser_selection_case)
+        self.ma_vue_plan.set_vue_generale(True)
         layout_contenu.addWidget(self.ma_vue_plan, stretch=2)
         
         mon_layout.addLayout(layout_contenu)
@@ -226,3 +246,16 @@ class MainWindowAppli1(QMainWindow):
         if self.parent:
             self.parent.show()
         self.close() 
+
+    def afficher_liste_produits(self):
+        """
+        Affiche la fenêtre de liste des produits.
+        """
+        dialogue = VueListeProduits(self.gestion_projet, self)
+        dialogue.exec()
+
+    def activer_zoom_plan(self):
+        """
+        Active le mode zoom/déplacement sur le plan (scrollbars et drag).
+        """
+        pass 
