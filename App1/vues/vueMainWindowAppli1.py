@@ -38,7 +38,7 @@ class MainWindowAppli1(QMainWindow):
         # Configuration de l'interface
         self.initialiser_interface()
 
-#F
+
         self.barre_etat = QStatusBar()
         self.setStatusBar(self.barre_etat)
         self.barre_etat.showMessage("Projet chargé.")
@@ -49,7 +49,6 @@ class MainWindowAppli1(QMainWindow):
         nécessaires à la gestion du projet.
         """
         # Initialisation du widget principal
-        #F
         self.initialiser_menu()
         self.initialiser_toolbar()
         self.ajouter_raccourcis()
@@ -71,7 +70,7 @@ class MainWindowAppli1(QMainWindow):
         # Affichage en plein écran
         self.showMaximized()
 
-#F
+
     def initialiser_menu(self):
         menu_bar = self.menuBar()
         menuFichier = menu_bar.addMenu('&Fichier')
@@ -105,8 +104,12 @@ class MainWindowAppli1(QMainWindow):
         action_zoom.setShortcut("Ctrl+Z")
         action_zoom.triggered.connect(lambda: self.ma_vue_plan.set_vue_generale(False))
         menuAffichage.addAction(action_zoom)
+        
+        action_a_propos = QAction("A Propos ?", self)
+        action_a_propos.triggered.connect(self.afficher_a_propos)
+        menuAide.addAction(action_a_propos)
 
-#F
+
     def initialiser_toolbar(self):
         toolbar = QToolBar("Outils rapides")
         self.addToolBar(toolbar)
@@ -128,7 +131,7 @@ class MainWindowAppli1(QMainWindow):
         action_liste.triggered.connect(self.afficher_liste_produits)
         toolbar.addAction(action_liste)
 
-#F
+
     def ajouter_raccourcis(self):
         sauvegarde_rapide = QAction(self)
         sauvegarde_rapide.setShortcut("Ctrl+S")
@@ -291,3 +294,19 @@ class MainWindowAppli1(QMainWindow):
         produits_existants.append(produit)
         self.gestion_projet.definir_produits_case(case, produits_existants)
         self.actualiser_plan([])       
+    
+    def afficher_a_propos(self):
+        QMessageBox.information(
+            self,
+            "À propos",
+            "<h3>Application Mon Magasin v1.0.19</h3>"
+            "<p><b>Dernière mise à jour :</b> 14 juin 2025</p>"
+            "<p><b>Créateurs :</b></p>"
+            "<ul>"
+            "<li>Marwa Kime – Cheffe de projet / Développeuse</li>"
+            "<li>Neda Khelifi – Développeuse</li>"
+            "<li>Mathys Levitre – Développeur</li>"
+            "<li>Frédéric Gobfert – Développeur</li>"
+            "</ul>",
+            QMessageBox.StandardButton.Ok
+        )

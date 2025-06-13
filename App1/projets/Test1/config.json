@@ -1,0 +1,81 @@
+{
+    "nom": "Test1",
+    "magasin": "Carrefour",
+    "auteur": "Albert",
+    "chemin_plan": "App1/projets/Test1/plan.jpg",
+    "produits": {
+        "U4": [
+            "Après rasage",
+            "Gel douche"
+        ],
+        "I5": [
+            "Abricots"
+        ],
+        "J15": [
+            "Figues sèches",
+            "Gingembre confit",
+            "Noisettes"
+        ],
+        "G17": [
+            "Boulgour",
+            "Cornichons"
+        ],
+        "H15": [
+            "Amandes",
+            "Beurre de cacahuète"
+        ],
+        "K18": [
+            "Bolognaise",
+            "Fruits au sirop",
+            "Pâté"
+        ],
+        "J17": [
+            "Cassonade",
+            "Dattes"
+        ],
+        "K14": [
+            "Citron confits",
+            "Noix coco râpée",
+            "Orange confite"
+        ],
+        "J13": [
+            "Figues sèches",
+            "Gingembre confit",
+            "Noisettes",
+            "Noix coco râpée",
+            "Noix de cajou"
+        ],
+        "T5": [
+            "Brosse à dents",
+            "Couches bébé",
+            "Crème main",
+            "Démaquillant",
+            "Déodorant"
+        ],
+        "T6": [
+            "Couches bébé",
+            "Crème main",
+            "Gel spray"
+        ],
+        "T4": [
+            "Démaquillant",
+            "Dentifrice",
+            "Déodorant"
+        ],
+        "T9": [
+            "Mousse à raser",
+            "Ouate"
+        ],
+        "E5": [
+            "Aiguillette de boeuf",
+            "Aiguillette de poulet"
+        ],
+        "B2": [
+            "Bigorneaux",
+            "Cabillaud",
+            "Coques",
+            "Écrevisses",
+            "Encornet"
+        ]
+    }
+}
