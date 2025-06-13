@@ -30,6 +30,7 @@ class ModelePlan:
         self.zones = {}  # Dictionnaire des zones avec leurs produits
         self.nom_projet = None
         self.chemin_plan = None
+        self.plan_cases_magasin()
         
     def charger_plan(self, chemin):
         """
@@ -140,7 +141,7 @@ class ModelePlan:
         return self.zones.get(zone, [])
 
     
-    def tempo(self):
+    def plan_cases_magasin(self):
         # Construction du dictionnaire correspondant au plan par defaut"
         self.dict_cases : dict = { 
                              "Légumes": ["H3", "I3", "J3", "K3", "H4", "I4", "J4", "K4", "H5", "I5", "J5", "K5", "H6", "I6", "J6", "K6", "H7", "I7", "J7", "K7", "H8", "I8", "J8", "K8", "H9", "I9", "J9", "K9", "H10", "I10", "J10", "K10", "H11", "I11", "J11", "K11"],

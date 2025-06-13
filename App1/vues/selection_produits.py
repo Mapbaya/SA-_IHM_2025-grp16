@@ -12,6 +12,7 @@ from PyQt6.QtWidgets import (QWidget, QVBoxLayout, QScrollArea,
                            QTreeWidget, QTreeWidgetItem, QLabel,
                            QPushButton, QMessageBox)
 from PyQt6.QtCore import Qt, pyqtSignal
+from modeles.modelePlan import ModelePlan
 import json
 import os
 
@@ -40,6 +41,7 @@ class SelectionProduits(QWidget):
             
         self.initialiser_interface()
         self.charger_produits()
+        self.modele_plan = ModelePlan()
         
     def initialiser_interface(self):
         """
@@ -129,6 +131,18 @@ class SelectionProduits(QWidget):
             case: Référence de la zone sélectionnée
         """
         self.ma_case = case
+        
+        # On verifie si la case selectionnee possede un rayon
+        if self.modele_plan:
+            cases_valides = self.modele_plan.liste_cases_occupees()
+            if case not in cases_valides:
+                QMessageBox.warning(self, "Zone invalide", f"La case {case} ne correspond à aucun rayon défini.")
+                self.ma_case = None
+                self.texte_info.setText("Sélectionnez une zone valide sur le plan")
+                self.bouton_ok.setEnabled(False)
+                self.bouton_vider.setEnabled(False)
+                return
+        
         self.mes_produits = []
         
         # Vérification du gestionnaire de projet

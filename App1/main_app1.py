@@ -18,8 +18,7 @@ from controleurs.gestion_projet import GestionProjet
 from vues.creation_projet import DialogueCreationProjet
 from vues.vueMainWindowAppli1 import MainWindowAppli1
 from config import DOSSIER_PROJETS
-from styles import (WINDOW_STYLE, BUTTON_STYLE, BUTTON_SECONDARY_STYLE,
-                        BUTTON_WARNING_STYLE, LIST_STYLE, TITLE_LABEL_STYLE)
+from styles import WINDOW_STYLE, BUTTON_STYLE, BUTTON_SECONDARY_STYLE, BUTTON_WARNING_STYLE, LIST_STYLE, TITLE_LABEL_STYLE
 
 class MainApp1(QMainWindow):
     """
