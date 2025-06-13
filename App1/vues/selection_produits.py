@@ -120,6 +120,34 @@ class SelectionProduits(QWidget):
                     
         except Exception as e:
             print(f"Erreur lors du chargement des produits : {str(e)}")
+    
+    def filtrer_produits_par_categorie(self):
+        for i in range(self.liste_produits.topLevelItemCount()):
+            categorie = self.liste_produits.topLevelItem(i)
+            cat_nom = categorie.text(0)
+            
+            # Si la catégorie n'est pas autorisée, on désactive tous ses produits
+            autorisee = cat_nom in self.categories_autorisees
+            
+             # On cache la catégorie si elle n'est pas autorisée ou si elle n'a aucun produit visible
+            any_produit_visible = False
+        
+            for j in range(categorie.childCount()):
+                produit = categorie.child(j)
+                
+                # On affiche seulement les produits dont la catégorie est autorisée
+                # et qui ne sont pas déjà utilisés ailleurs
+                if autorisee and (produit.flags() & Qt.ItemFlag.ItemIsEnabled):
+                    produit.setHidden(False)
+                    produit.setFlags(produit.flags() | Qt.ItemFlag.ItemIsUserCheckable)
+                    # reset le check si besoin
+                    produit.setCheckState(0, Qt.CheckState.Unchecked)
+                    any_produit_visible = True
+                else:
+                    produit.setHidden(True)
+        
+            # Si aucune produit visible, on cache la catégorie entière
+            categorie.setHidden(not any_produit_visible)
             
     def choisir_case(self, case):
         """
@@ -140,6 +168,10 @@ class SelectionProduits(QWidget):
                 self.bouton_ok.setEnabled(False)
                 self.bouton_vider.setEnabled(False)
                 return
+            
+            # récupérer les catégories autorisées pour la case
+            self.categories_autorisees = self.modele_plan.categories_autorisees_pour_case(case)
+
         
         self.mes_produits = []
         
@@ -162,18 +194,27 @@ class SelectionProduits(QWidget):
         except Exception as e:
             QMessageBox.warning(self, "Erreur", "Impossible de récupérer les produits de la zone.")
             return
+        
+        self.filtrer_produits_par_categorie()
             
-        # Mise à jour de l'interface
+        # Cocher les produits déjà sélectionnés, uniquement s'ils sont visibles
         self.en_train_de_modifier = True
-        self.reinitialiser_selection()
-        if self.mes_produits:
-            for i in range(self.liste_produits.topLevelItemCount()):
-                categorie = self.liste_produits.topLevelItem(i)
-                for j in range(categorie.childCount()):
-                    produit = categorie.child(j)
-                    nom_produit = produit.text(0).split(" (utilisé")[0]
-                    if nom_produit in self.mes_produits:
-                        produit.setCheckState(0, Qt.CheckState.Checked)
+        self.reinitialiser_selection() # décoche tout
+        
+            
+        for i in range(self.liste_produits.topLevelItemCount()):
+            categorie = self.liste_produits.topLevelItem(i)
+            for j in range(categorie.childCount()):
+                produit = categorie.child(j)
+                if produit.isHidden():
+                    continue  # ignore les produits cachés
+                
+                nom_produit = produit.text(0).split(" (utilisé")[0]
+                if nom_produit in self.mes_produits:
+                    produit.setCheckState(0, Qt.CheckState.Checked)
+                else:
+                    produit.setCheckState(0, Qt.CheckState.Unchecked)
+                            
         self.en_train_de_modifier = False
         
         # Activation des contrôles
@@ -223,6 +264,17 @@ class SelectionProduits(QWidget):
             self.texte_info.setText("Sélectionnez d'abord une zone sur le plan")
             return
             
+            
+        categorie_parente = item.parent()
+        if categorie_parente:
+            nom_categorie = categorie_parente.text(0)
+            if nom_categorie not in self.categories_autorisees:
+                item.setCheckState(0, Qt.CheckState.Unchecked)
+                # QMessageBox.warning(self, "Produit non autorisé",
+                #                     f"Le produit '{item.text(0)}' n'est pas autorisé dans cette zone.")
+                return
+        
+        
         # Récupération du nom du produit sans le suffixe "(utilisé en...)"
         nom_produit = item.text(0).split(" (utilisé")[0]
         

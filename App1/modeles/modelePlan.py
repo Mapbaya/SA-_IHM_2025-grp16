@@ -249,6 +249,21 @@ class ModelePlan:
         return liste_cases_vides    
     
 
+    def rayons_de_case(self, case: str) -> list[str]:
+        """Retourne la liste des rayons (clés) dont la case fait partie."""
+        rayons = [nom_rayon for nom_rayon, cases in self.dict_cases.items() if case in cases]
+        return rayons
+    
+    def categories_autorisees_pour_case(self, case: str) -> list[str]:
+        """Retourne toutes les catégories autorisées sur cette case.
+        Si une case appartient à plusieurs rayons, toutes leurs catégories sont autorisées."""
+        return self.rayons_de_case(case)
+    
+    
+    def categorie_autorisee(self, case: str, categorie_produit: str) -> bool:
+        return categorie_produit in self.categories_autorisees_pour_case(case)
+
+
 # if __name__ == '__main__':
     
 #     def generation_cases_tableau_complet(nb_col, nb_lignes):

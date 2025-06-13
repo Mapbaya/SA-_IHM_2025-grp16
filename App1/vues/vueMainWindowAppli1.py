@@ -246,6 +246,7 @@ class MainWindowAppli1(QMainWindow):
         if self.parent:
             self.parent.show()
         self.close() 
+<<<<<<< HEAD
 
     def afficher_liste_produits(self):
         """
@@ -259,3 +260,25 @@ class MainWindowAppli1(QMainWindow):
         Active le mode zoom/déplacement sur le plan (scrollbars et drag).
         """
         pass 
+=======
+        
+        
+    def ajouter_produit_dans_case(self, case, produit, categorie):
+        """
+        Tente d’ajouter un produit dans une case donnée après validation.
+        """
+        modele = self.ma_vue_plan.scene_plan.modele
+        if not modele.categorie_autorisee(case, categorie):
+            QMessageBox.warning(self, "Placement interdit",
+                f"La catégorie '{categorie}' n’est pas autorisée dans la case {case}.")
+            return
+
+        produits_existants = self.gestion_projet.obtenir_produits_case(case)
+        if produit in produits_existants:
+            QMessageBox.information(self, "Déjà présent", f"Le produit '{produit}' est déjà placé dans la case {case}.")
+            return
+
+        produits_existants.append(produit)
+        self.gestion_projet.definir_produits_case(case, produits_existants)
+        self.actualiser_plan([])       
+>>>>>>> bef9ceea206e42938b13bd61ea50010b6dff7fb0
