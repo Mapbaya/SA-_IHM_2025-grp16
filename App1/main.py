@@ -11,16 +11,11 @@ J'ai fait ça pour mon projet de BUT Info,
 et j'espère que ça va aider plein de gens !
 """
 
-import sys
-
-
-import os
-from PyQt6.QtWidgets import (QApplication, QMainWindow, QWidget, 
-                           QVBoxLayout, QPushButton, QLabel, QMessageBox)
+import sys, os
+from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QPushButton, QLabel, QMessageBox
 from PyQt6.QtCore import Qt
 from main_app1 import MainApp1
-from styles import (WINDOW_STYLE, BUTTON_STYLE, BUTTON_SECONDARY_STYLE,
-                        TITLE_LABEL_STYLE)
+from styles import WINDOW_STYLE, BUTTON_STYLE, BUTTON_SECONDARY_STYLE, TITLE_LABEL_STYLE
 
 # Les dossiers seront créés uniquement quand ils seront nécessaires
 DOSSIER_PROJETS = 'App1/projets'

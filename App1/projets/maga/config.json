@@ -3,5 +3,16 @@
     "magasin": "jaoaa",
     "auteur": "laha",
     "chemin_plan": "App1/projets/maga/plan.jpg",
-    "produits": {}
+    "produits": {
+        "V19": [
+            "Crêpes",
+            "Miel",
+            "Pain d'épice"
+        ],
+        "W2": [
+            "Biscuits salés",
+            "Bretzel",
+            "Mini-feuilletés"
+        ]
+    }
 }

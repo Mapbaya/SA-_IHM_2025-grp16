@@ -14,7 +14,6 @@ from config import DOSSIER_PROJETS
 
 
 class ModelePlan:
-
     """
     Modèle de données pour le plan de magasin.
     
@@ -23,6 +22,7 @@ class ModelePlan:
     - Les zones définies
     - Les produits par zone
     """
+    
     
     def __init__(self):
         """Initialise un nouveau modèle de plan."""

@@ -1,0 +1,12 @@
+{
+    "nom": "fre",
+    "magasin": "fe",
+    "auteur": "fred",
+    "chemin_plan": "App1/projets/fre/plan.jpg",
+    "produits": {
+        "D6": [
+            "Betterave",
+            "Brocolis"
+        ]
+    }
+}

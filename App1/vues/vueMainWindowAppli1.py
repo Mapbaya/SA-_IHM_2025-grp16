@@ -6,13 +6,14 @@ Cette interface présente :
 - Un gestionnaire de produits par zone
 - Des outils de modification et de sauvegarde
 """
-
+import os
 from PyQt6.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
-                           QLabel, QPushButton, QMessageBox, QGraphicsView)
+                           QLabel, QPushButton, QMessageBox, QGraphicsView, QToolBar, QStatusBar)
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QPixmap
+from PyQt6.QtGui import QPixmap, QIcon, QAction
 from vues.vueScenePlan import VuePlan, ScenePlan
 from vues.selection_produits import SelectionProduits
+from constantes import Constantes
 from styles import (WINDOW_STYLE, BUTTON_STYLE, BUTTON_SECONDARY_STYLE,
                         TITLE_LABEL_STYLE)
 
@@ -36,6 +37,11 @@ class MainWindowAppli1(QMainWindow):
 
         # Configuration de l'interface
         self.initialiser_interface()
+
+#F
+        self.barre_etat = QStatusBar()
+        self.setStatusBar(self.barre_etat)
+        self.barre_etat.showMessage("Projet chargé.")
         
     def initialiser_interface(self):
         """
@@ -43,6 +49,12 @@ class MainWindowAppli1(QMainWindow):
         nécessaires à la gestion du projet.
         """
         # Initialisation du widget principal
+        #F
+        self.initialiser_menu()
+        self.initialiser_toolbar()
+        self.ajouter_raccourcis()
+
+
         mon_widget = QWidget()
         self.setCentralWidget(mon_widget)
         
@@ -58,7 +70,54 @@ class MainWindowAppli1(QMainWindow):
         
         # Affichage en plein écran
         self.showMaximized()
-        
+
+#F
+    def initialiser_menu(self):
+        menu_bar = self.menuBar()
+        menuFichier = menu_bar.addMenu('&Fichier')
+        menuEdition = menu_bar.addMenu('&Edition')
+        menuAffichage = menu_bar.addMenu('&Affichage')
+        menuAide = menu_bar.addMenu('&Aide')
+
+        action_sauvegarder = QAction("Enregistrer", self)
+        action_sauvegarder.setShortcut("Ctrl+S")
+        action_sauvegarder.triggered.connect(self.sauvegarder_projet)
+        menuFichier.addAction(action_sauvegarder)
+
+        action_quitter = QAction("Quitter", self)
+        action_quitter.setShortcut("Ctrl+Q")
+        action_quitter.triggered.connect(self.retourner_liste)
+        menuFichier.addAction(action_quitter)
+
+#F
+    def initialiser_toolbar(self):
+        toolbar = QToolBar("Outils rapides")
+        self.addToolBar(toolbar)
+        print("CHEMIN_ICONES =", Constantes.CHEMIN_ICONES)
+        print("Chemin complet =", os.path.join(Constantes.CHEMIN_ICONES, 'flechePrecedent.png'))
+        action_sauvegarder = QAction(QIcon(os.path.join(Constantes.CHEMIN_ICONES, 'save.png')), 'Enregistrer', self)
+        action_sauvegarder.setToolTip("Sauvegarder le projet")
+        action_sauvegarder.triggered.connect(self.sauvegarder_projet)
+        toolbar.addAction(action_sauvegarder)
+
+        action_retour = QAction(QIcon(os.path.join(Constantes.CHEMIN_ICONES, 'flechePrecedent.png')), 'Précédent', self)
+        action_retour.setToolTip("Retour")
+        action_retour.triggered.connect(self.retourner_liste)
+        toolbar.addAction(action_retour)
+
+#F
+    def ajouter_raccourcis(self):
+        sauvegarde_rapide = QAction(self)
+        sauvegarde_rapide.setShortcut("Ctrl+S")
+        sauvegarde_rapide.triggered.connect(self.sauvegarder_projet)
+        self.addAction(sauvegarde_rapide)
+
+        quitter_rapide = QAction(self)
+        quitter_rapide.setShortcut("Ctrl+Q")
+        quitter_rapide.triggered.connect(self.retourner_liste)
+        self.addAction(quitter_rapide)
+
+
     def configurer_titre(self, mon_layout):
         """
         Configure la section titre avec les informations du projet.
@@ -160,6 +219,7 @@ class MainWindowAppli1(QMainWindow):
                 "Erreur",
                 f"Erreur lors de la sauvegarde : {str(e)}"
             )
+        self.barre_etat.showMessage("Projet sauvegardé avec succès", 3000)
             
     def retourner_liste(self):
         """
