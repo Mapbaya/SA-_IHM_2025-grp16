@@ -1,8 +1,7 @@
 from PyQt6.QtWidgets import QGraphicsView
 from PyQt6.QtCore import Qt
 from constantes import Constantes
-from styles import (WINDOW_STYLE, BUTTON_STYLE, BUTTON_SECONDARY_STYLE,
-                        DOCK_STYLE, GRAPHICS_VIEW_STYLE, COLORS)
+from styles import WINDOW_STYLE, BUTTON_STYLE, BUTTON_SECONDARY_STYLE, DOCK_STYLE, GRAPHICS_VIEW_STYLE, COLORS
 
 
 class VueInteraction(QGraphicsView):

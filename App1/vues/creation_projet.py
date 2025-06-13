@@ -8,12 +8,10 @@ Cette interface collecte :
 - Le fichier du plan
 """
 
-from PyQt6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, 
-                           QPushButton, QFileDialog, QMessageBox)
+from PyQt6.QtWidgets import QDialog, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton, QFileDialog, QMessageBox
 from PyQt6.QtCore import Qt
 from controleurs.gestion_projet import GestionProjet
-from styles import (DIALOG_STYLE, BUTTON_STYLE, BUTTON_SECONDARY_STYLE,
-                        INPUT_STYLE, FIELD_LABEL_STYLE)
+from styles import DIALOG_STYLE, BUTTON_STYLE, BUTTON_SECONDARY_STYLE, INPUT_STYLE, FIELD_LABEL_STYLE
 
 class DialogueCreationProjet(QDialog):
     """

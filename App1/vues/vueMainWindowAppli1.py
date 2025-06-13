@@ -7,15 +7,13 @@ Cette interface présente :
 - Des outils de modification et de sauvegarde
 """
 import os
-from PyQt6.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
-                           QLabel, QPushButton, QMessageBox, QGraphicsView, QToolBar, QStatusBar)
+from PyQt6.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QMessageBox, QGraphicsView, QToolBar, QStatusBar
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QPixmap, QIcon, QAction
 from vues.vueScenePlan import VuePlan, ScenePlan
 from vues.selection_produits import SelectionProduits
 from constantes import Constantes
-from styles import (WINDOW_STYLE, BUTTON_STYLE, BUTTON_SECONDARY_STYLE,
-                        TITLE_LABEL_STYLE)
+from styles import WINDOW_STYLE, BUTTON_STYLE, BUTTON_SECONDARY_STYLE, TITLE_LABEL_STYLE
 
 class MainWindowAppli1(QMainWindow):
     """

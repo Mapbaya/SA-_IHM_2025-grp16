@@ -8,9 +8,7 @@ Ce module implémente :
 - L'affichage des produits par zone
 """
 
-from PyQt6.QtWidgets import (QGraphicsScene, QGraphicsPixmapItem, 
-                           QGraphicsLineItem, QGraphicsTextItem,
-                           QGraphicsView)
+from PyQt6.QtWidgets import QGraphicsScene, QGraphicsPixmapItem, QGraphicsLineItem, QGraphicsTextItem, QGraphicsView
 from PyQt6.QtGui import QPixmap, QPen, QColor, QBrush, QPainter
 from constantes import Constantes
 from PyQt6.QtCore import pyqtSignal, Qt, QRectF

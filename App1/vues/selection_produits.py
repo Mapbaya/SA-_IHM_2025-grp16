@@ -8,9 +8,7 @@ Fonctionnalités principales :
 - Gestion des conflits d'attribution
 """
 
-from PyQt6.QtWidgets import (QWidget, QVBoxLayout, QScrollArea, 
-                           QTreeWidget, QTreeWidgetItem, QLabel,
-                           QPushButton, QMessageBox)
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QScrollArea, QTreeWidget, QTreeWidgetItem, QLabel, QPushButton, QMessageBox
 from PyQt6.QtCore import Qt, pyqtSignal
 from modeles.modelePlan import ModelePlan
 import json
