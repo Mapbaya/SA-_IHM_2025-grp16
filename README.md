@@ -74,6 +74,7 @@ L'application 1 a été testée avec :
 ## Livrables
 
 - Code source complet de l'application 1 (commenté et documenté)
+- Code source de l'application 2
 - Plans de magasin utilisés pour les tests
 - Exemples de projets créés avec l'application
 - Notice d'utilisation intégrée à l'application
