@@ -37,7 +37,7 @@ class MainWindowAppli1(QMainWindow):
         # Configuration de l'interface
         self.initialiser_interface()
 
-#F
+
         self.barre_etat = QStatusBar()
         self.setStatusBar(self.barre_etat)
         self.barre_etat.showMessage("Projet chargé.")
@@ -48,7 +48,7 @@ class MainWindowAppli1(QMainWindow):
         nécessaires à la gestion du projet.
         """
         # Initialisation du widget principal
-        #F
+        
         self.initialiser_menu()
         self.initialiser_toolbar()
         self.ajouter_raccourcis()

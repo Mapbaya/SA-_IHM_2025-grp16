@@ -44,6 +44,10 @@ class VueListeProduits(QDialog):
         titre.setStyleSheet(TITLE_LABEL_STYLE)
         titre.setAlignment(Qt.AlignmentFlag.AlignCenter)
         mon_layout.addWidget(titre)
+
+        self.label_total = QLabel("")  # Label pour le total des produits
+        self.label_total.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        mon_layout.addWidget(self.label_total)
         
         # Arborescence des produits
         self.liste_produits = QTreeWidget()
@@ -74,8 +78,9 @@ class VueListeProduits(QDialog):
         # Récupération des données du projet
         projet = self.gestion_projet.projet_actuel
         if not projet or 'produits' not in projet:
+            self.label_total.setText("Aucun produit placé.")
             return
-            
+        
         # Chargement des catégories depuis le fichier de produits
         try:
             with open('App1/list/liste_produits_original.json', 'r', encoding='utf-8') as f:
@@ -83,21 +88,25 @@ class VueListeProduits(QDialog):
         except Exception as e:
             print(f"Erreur lors du chargement des catégories : {str(e)}")
             categories_produits = {}
-            
+        
         # Création des catégories
         categories = {}
+        total = 0
         for case, produits in projet['produits'].items():
             for nom_produit in produits:
+                total += 1
                 # Recherche de la catégorie du produit
                 categorie = 'Non catégorisé'
                 for cat, prods in categories_produits.items():
                     if nom_produit in prods:
                         categorie = cat
                         break
-                        
                 if categorie not in categories:
                     categories[categorie] = []
                 categories[categorie].append((nom_produit, case))
+        
+        # Affichage du total
+        self.label_total.setText(f"Nombre total de produits placés : {total}")
         
         # Remplissage de l'arborescence
         for categorie, produits in sorted(categories.items()):
