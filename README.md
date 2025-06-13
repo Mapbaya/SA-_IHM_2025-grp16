@@ -67,7 +67,6 @@ L'application 1 dispose d'une notice d'utilisation intégrée accessible depuis 
 ## Tests et validation
 
 L'application 1 a été testée avec :
-- Différents formats de plans de magasin
 - Listes de produits variées (minimum 20 produits comme spécifié)
 - Scénarios d'erreur utilisateur
 - Tests de performance sur le système de sauvegarde
@@ -75,6 +74,7 @@ L'application 1 a été testée avec :
 ## Livrables
 
 - Code source complet de l'application 1 (commenté et documenté)
+- Code source de l'application 2
 - Plans de magasin utilisés pour les tests
 - Exemples de projets créés avec l'application
 - Notice d'utilisation intégrée à l'application
