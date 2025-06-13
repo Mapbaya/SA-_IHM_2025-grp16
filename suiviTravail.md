@@ -28,6 +28,7 @@ Création du Trello.
 
                 
 ## 10/06/25  
+
 **Appli 1** :
 
 • Création de l'interface principale  
@@ -113,10 +114,6 @@ Création du Trello.
     • Ajout de notifications d'erreurs : l'utilisateur est informé s'il oublie de remplir des champs lors de la création d’un projet.
     • Une notice d'utilisation claire a été rédigée.
     • Une fenêtre "À propos" a été intégrée à l'application.
-
-
-
-
 
 
 
