@@ -67,7 +67,6 @@ L'application 1 dispose d'une notice d'utilisation intégrée accessible depuis 
 ## Tests et validation
 
 L'application 1 a été testée avec :
-- Différents formats de plans de magasin
 - Listes de produits variées (minimum 20 produits comme spécifié)
 - Scénarios d'erreur utilisateur
 - Tests de performance sur le système de sauvegarde
