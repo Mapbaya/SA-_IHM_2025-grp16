@@ -82,6 +82,7 @@ class SelectionProduits(QWidget):
         et applique les contraintes d'utilisation.
         """
         try:
+            self.liste_produits.clear() #empeche les doublons
             # Chargement du fichier de données en utilisant os.path.join pour la compatibilité
             mon_fichier = os.path.join("App1", "list", "liste_produits_original.json")
             mon_fichier = os.path.normpath(mon_fichier)  # Normalise le chemin selon l'OS

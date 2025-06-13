@@ -205,3 +205,6 @@ class GestionProjet:
             if produit in produits:
                 return case
         return None 
+    
+    
+    

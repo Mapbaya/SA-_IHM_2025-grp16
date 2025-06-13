@@ -76,6 +76,17 @@
             "Coques",
             "Écrevisses",
             "Encornet"
+        ],
+        "H4": [
+            "Artichaut",
+            "Asperges"
+        ],
+        "K8": [
+            "Carotte",
+            "Céleri",
+            "Champignons",
+            "Bananes",
+            "Cassis"
         ]
     }
 }
