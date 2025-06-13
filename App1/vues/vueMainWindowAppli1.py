@@ -246,7 +246,6 @@ class MainWindowAppli1(QMainWindow):
         if self.parent:
             self.parent.show()
         self.close() 
-<<<<<<< HEAD
 
     def afficher_liste_produits(self):
         """
@@ -260,7 +259,6 @@ class MainWindowAppli1(QMainWindow):
         Active le mode zoom/déplacement sur le plan (scrollbars et drag).
         """
         pass 
-=======
         
         
     def ajouter_produit_dans_case(self, case, produit, categorie):
@@ -281,4 +279,3 @@ class MainWindowAppli1(QMainWindow):
         produits_existants.append(produit)
         self.gestion_projet.definir_produits_case(case, produits_existants)
         self.actualiser_plan([])       
->>>>>>> bef9ceea206e42938b13bd61ea50010b6dff7fb0
