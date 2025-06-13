@@ -1,9 +1,0 @@
-{
-    "nom": "Test",
-    "magasin": "Magasin de test",
-    "auteur": "Utilisateur test",
-    "date_creation": "12/06/2025",
-    "chemin_plan": "App1/img/plan.jpg",
-    "taille_quadrillage": 100,
-    "zones": {}
-}

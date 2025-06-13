@@ -1,0 +1,20 @@
+{
+    "nom": "Magasin_de_Calais",
+    "magasin": "Calaisina",
+    "auteur": "Shuriki",
+    "chemin_plan": "App1/projets/Magasin_de_Calais/plan.jpg",
+    "produits": {
+        "D4": [
+            "Croque monsieur",
+            "Crudités",
+            "Feuilles de brick"
+        ],
+        "L13": [
+            "Blé dur",
+            "Bouillon cube",
+            "Boulgour",
+            "Anchois",
+            "Bolognaise"
+        ]
+    }
+}

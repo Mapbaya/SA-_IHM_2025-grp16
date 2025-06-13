@@ -239,3 +239,33 @@ SUCCESS_STYLE = f"""
     font-size: 14px;
     padding: 8px;
 """ 
+
+
+# Style spécifique pour la notice d'utilisation
+NOTICE_STYLE = f"""
+    QDialog {{
+        background-color: {COLORS['background']};
+    }}
+    QScrollArea, QScrollArea > QWidget > QWidget {{
+        background-color: {COLORS['background']};
+        border: none;
+    }}
+    QLabel {{
+        color: {COLORS['text']};
+        font-size: 12px;
+        padding: 2px;
+        background-color: transparent;
+    }}
+    QPushButton {{
+        background-color: {COLORS['primary']};
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 4px;
+        font-weight: bold;
+        min-width: 80px;
+    }}
+    QPushButton:hover {{
+        background-color: {COLORS['primary_light']};
+    }}
+"""

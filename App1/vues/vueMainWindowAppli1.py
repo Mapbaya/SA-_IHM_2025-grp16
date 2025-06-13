@@ -15,6 +15,7 @@ from vues.selection_produits import SelectionProduits
 from vues.vueListeProduits import VueListeProduits
 from constantes import Constantes
 from styles import WINDOW_STYLE, BUTTON_STYLE, BUTTON_SECONDARY_STYLE, TITLE_LABEL_STYLE
+from vues.notice_utilisation import NoticeUtilisation
 
 class MainWindowAppli1(QMainWindow):
     """
@@ -37,7 +38,7 @@ class MainWindowAppli1(QMainWindow):
         # Configuration de l'interface
         self.initialiser_interface()
 
-
+#F
         self.barre_etat = QStatusBar()
         self.setStatusBar(self.barre_etat)
         self.barre_etat.showMessage("Projet chargé.")
@@ -48,7 +49,7 @@ class MainWindowAppli1(QMainWindow):
         nécessaires à la gestion du projet.
         """
         # Initialisation du widget principal
-        
+        #F
         self.initialiser_menu()
         self.initialiser_toolbar()
         self.ajouter_raccourcis()
@@ -77,6 +78,11 @@ class MainWindowAppli1(QMainWindow):
         menuEdition = menu_bar.addMenu('&Edition')
         menuAffichage = menu_bar.addMenu('&Affichage')
         menuAide = menu_bar.addMenu('&Aide')
+        
+        action_notice = QAction("Notice d'utilisation", self)
+        action_notice.setShortcut("F1")  # Raccourci clavier standard pour l'aide
+        action_notice.triggered.connect(self.afficher_notice)
+        menuAide.addAction(action_notice)
 
         action_sauvegarder = QAction("Enregistrer", self)
         action_sauvegarder.setShortcut("Ctrl+S")
@@ -256,11 +262,17 @@ class MainWindowAppli1(QMainWindow):
 
     def activer_zoom_plan(self):
         """
-        Active le mode zoom/déplacement sur le plan (scrollbars et drag).
+        Active le zoom sur le plan.
         """
         pass 
-        
-        
+    
+    def afficher_notice(self):
+        """
+        Affiche la notice d'utilisation
+        """
+        notice = NoticeUtilisation(self)
+        notice.exec()
+
     def ajouter_produit_dans_case(self, case, produit, categorie):
         """
         Tente d’ajouter un produit dans une case donnée après validation.
