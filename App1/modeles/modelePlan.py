@@ -204,6 +204,13 @@ class ModelePlan:
                         cases_occupees.append(case)
         return cases_occupees
     
+    def liste_cases_occupees_sans_caisse(self):
+        cases_occupees : list = self.liste_cases_occupees()
+        set_cases_caisses : list = set(self.dict_cases["Caisses"])
+        cases_occupees_sans_caisse = [case for case in cases_occupees if case not in set_cases_caisses]
+        return cases_occupees_sans_caisse
+        
+    
     
     def liste_cases_par_rayon(self, nom_rayon : str, dict_cases : dict):
         cases_rayon : list = []

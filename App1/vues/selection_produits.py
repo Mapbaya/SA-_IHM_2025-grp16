@@ -132,9 +132,9 @@ class SelectionProduits(QWidget):
         """
         self.ma_case = case
         
-        # On verifie si la case selectionnee possede un rayon
+        # On verifie si la case selectionnee peuvent recevoir des produits (pas de cses vides et pas de cases Caisses)
         if self.modele_plan:
-            cases_valides = self.modele_plan.liste_cases_occupees()
+            cases_valides = self.modele_plan.liste_cases_occupees_sans_caisse()
             if case not in cases_valides:
                 QMessageBox.warning(self, "Zone invalide", f"La case {case} ne correspond à aucun rayon défini.")
                 self.ma_case = None
@@ -162,8 +162,7 @@ class SelectionProduits(QWidget):
             else:
                 self.bouton_vider.setEnabled(False)
         except Exception as e:
-            QMessageBox.warning(self, "Erreur",
-                "Impossible de récupérer les produits de la zone.")
+            QMessageBox.warning(self, "Erreur", "Impossible de récupérer les produits de la zone.")
             return
             
         # Mise à jour de l'interface
