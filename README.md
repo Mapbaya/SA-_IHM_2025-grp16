@@ -56,7 +56,7 @@ Le projet respecte l'architecture MVC (Modèle-Vue-Contrôleur) imposée dans le
 
 ### Lancement
 ```bash
-git clone [URL_DU_DEPOT]
+git clone https://github.com/Mapbaya/magasin_projet_ihm.git
 cd magasin_projet_ihm
 python app1/main.py
 ```
