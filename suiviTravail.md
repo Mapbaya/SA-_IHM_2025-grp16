@@ -86,10 +86,44 @@ Création du Trello.
     • Interface plus intuitive
     • Meilleure organisation visuelle
 
-Gestion des erreurs :
+• Gestion des erreurs :
 
     • Messages d'erreur explicites
     • Validation des actions
+
+## 13/06/2025
+**Appli 1**:
+
+• Fonctionnalités :
+
+    • Placement des produits restreint à leur rayon respectif (logique métier respectée).
+
+    • Impossible de dépasser 5 produits par case.
+
+    • Affichage dynamique de la liste complète des produits placés dans le magasin.
+
+    • Affichage précis de la position de chaque produit sur la grille (numéro de case).
+
+• Interaction utilisateur :
+
+    •  Zoom sur le plan désormais disponible (meilleure navigation dans le quadrillage).
+
+    •  Ajout d’une barre d’état avec accès à certains raccourcis importants.
+
+    •  Possibilité de sauvegarder rapidement depuis la barre d’état.
+
+    • Amélioration générale de l'interface utilisateur pour la rendre plus intuitive et claire.
+
+• Qualité & Robustesse :
+
+    • Ajout de notifications d'erreurs : l'utilisateur est informé s'il oublie de remplir des champs lors de la création d’un projet.
+
+    • Une notice d'utilisation claire a été rédigée.
+
+    • Une fenêtre "À propos" a été intégrée à l'application.
+
+
+
 
 
 
