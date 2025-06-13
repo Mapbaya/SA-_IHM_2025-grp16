@@ -15,6 +15,16 @@
             "Boulgour",
             "Anchois",
             "Bolognaise"
+        ],
+        "C5": [
+            "Foie gras",
+            "Galettes",
+            "Pâtes à tarte"
+        ],
+        "G8": [
+            "Andouille",
+            "Bifteck de boeuf",
+            "Burgers"
         ]
     }
 }
