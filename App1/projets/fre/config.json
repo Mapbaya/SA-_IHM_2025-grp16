@@ -15,6 +15,28 @@
         "Z20": [
             "Smartphone",
             "Ordinateur portable"
+        ],
+        "U5": [
+            "Herbes de Provence",
+            "Ketchup",
+            "Levure",
+            "Mayonnaise",
+            "Moutarde"
+        ],
+        "Y19": [
+            "Croque monsieur",
+            "Feuilles de brick",
+            "Pâtes fraîches"
+        ],
+        "B2": [
+            "Quiches"
+        ],
+        "G13": [
+            "Abricots secs",
+            "Orange confite",
+            "Anchois",
+            "Compote",
+            "Flageolets"
         ]
     }
 }
