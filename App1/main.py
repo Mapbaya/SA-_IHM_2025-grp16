@@ -12,9 +12,13 @@ et j'espère que ça va aider plein de gens !
 """
 
 import sys, os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QPushButton, QLabel, QMessageBox
 from PyQt6.QtCore import Qt
 from main_app1 import MainApp1
+from App2.MainWindow import MainWindow
+from App2.Donnees import Donnees
+
 from styles import WINDOW_STYLE, BUTTON_STYLE, BUTTON_SECONDARY_STYLE, TITLE_LABEL_STYLE
 
 # Les dossiers seront créés uniquement quand ils seront nécessaires
@@ -125,14 +129,11 @@ class MaFenetrePrincipale(QMainWindow):
         
     def ouvrir_courses(self):
         """
-        Je préviens que cette partie arrive bientôt !
+        J'ouvre l'appli pour faire les courses !
         """
-        QMessageBox.information(
-            self, 
-            "Patience...", 
-            "Cette super fonction arrive bientôt !\n"
-            "Tu pourras faire tes courses sans te perdre ^^"
-        )
+        donnees = Donnees()
+        self.ma_fenetre_course = MainWindow(donnees)
+        self.ma_fenetre_course.show()
 
 if __name__ == '__main__':
     # Je lance mon appli

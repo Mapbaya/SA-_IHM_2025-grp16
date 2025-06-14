@@ -2,8 +2,8 @@ import json
 import os
 from PyQt6.QtWidgets import QHBoxLayout, QPushButton, QWidget, QInputDialog, QMessageBox
 
-from Donnees import Donnees
-from styles import BUTTON_SECONDARY_STYLE, BUTTON_WARNING_STYLE
+from .Donnees import Donnees
+from .styles import BUTTON_SECONDARY_STYLE, BUTTON_WARNING_STYLE
 
 class Boutons(QWidget):
     def __init__(self, donnees: Donnees):

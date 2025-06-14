@@ -2,9 +2,9 @@ from PyQt6.QtWidgets import QCheckBox, QComboBox, QGridLayout, QHBoxLayout, QLab
 from PyQt6.QtGui import QPalette, QColor, QPixmap
 from PyQt6.QtCore import Qt
 
-from Donnees import Donnees
-from ProduitWidget import ProduitWidget
-from styles import TITLE_LABEL_STYLE, BUTTON_FILTRE_STYLE
+from .Donnees import Donnees
+from .ProduitWidget import ProduitWidget
+from .styles import TITLE_LABEL_STYLE, BUTTON_FILTRE_STYLE
 
 class Categories(QWidget):
     def __init__(self, liste_categories : list, list_prod_checked : list, data : Donnees, selection_widget) -> None:

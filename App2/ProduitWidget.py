@@ -1,10 +1,10 @@
 from PyQt6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QApplication, QMainWindow, QCheckBox, QPushButton
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QPixmap
-import sys
+import sys, os
 
-from Donnees import Donnees
-from styles import FIELD_LABEL_STYLE
+from .Donnees import Donnees
+from .styles import FIELD_LABEL_STYLE
 
 
 class ProduitWidget(QWidget):
@@ -29,8 +29,17 @@ class ProduitWidget(QWidget):
         self.selection_widget.widgets_produits[self.nomProduit] = self
 
 
+        # chemin absolu du dossier Images
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        chemin_image = os.path.join(script_dir, "Images", name + ".png")
+        chemin_image = os.path.normpath(chemin_image)
+        
+        
         image = QLabel()
-        pixmap = QPixmap("./Images/" + name + ".png").scaled(50, 50, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
+        pixmap = QPixmap(chemin_image).scaled(50, 50, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
+        
+        
+        
         image.setPixmap(pixmap)
         image.setFixedSize(60, 40)
 

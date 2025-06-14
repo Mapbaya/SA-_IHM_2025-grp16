@@ -7,12 +7,9 @@ class Donnees:
         # Obtenir le répertoire du script actuel
         script_dir = os.path.dirname(os.path.abspath(__file__))
         
-        chemin_fichier = os.path.join("..", "App1", "list", "liste_produits_original.json")
-        
-        # Debug - afficher les chemins pour vérification
-        print(f"Répertoire courant : {os.getcwd()}")
-        print(f"Chemin relatif : {chemin_fichier}")
-        print(f"Chemin absolu : {os.path.abspath(chemin_fichier)}")
+        chemin_fichier = os.path.join(script_dir, "..", "App1", "list", "liste_produits_original.json")
+        chemin_fichier = os.path.normpath(chemin_fichier)
+
         
         with open(chemin_fichier, "r", encoding="utf-8") as f: data = json.load(f)
 

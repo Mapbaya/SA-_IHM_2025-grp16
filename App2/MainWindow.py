@@ -2,12 +2,12 @@ from PyQt6.QtWidgets import QHBoxLayout, QMainWindow, QVBoxLayout, QWidget, QMes
 from PyQt6.QtGui import QPixmap, QColor
 from PyQt6.QtCore import Qt
 
-from Boutons import Boutons
-from Categories import Categories
-from Donnees import Donnees
-from Selection import Selection
+from .Boutons import Boutons
+from .Categories import Categories
+from .Donnees import Donnees
+from .Selection import Selection
 
-from styles import WINDOW_STYLE, BUTTON_WARNING_STYLE_QUIT, BUTTON_SECONDARY_STYLE_QUIT
+from .styles import WINDOW_STYLE, BUTTON_WARNING_STYLE_QUIT, BUTTON_SECONDARY_STYLE_QUIT
 
 class MainWindow(QMainWindow):
 
