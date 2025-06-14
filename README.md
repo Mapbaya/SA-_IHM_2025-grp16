@@ -9,7 +9,7 @@ L'objectif de ce projet est de créer deux applications permettant d'optimiser l
 ## Équipe de développement
 
 **Groupe 16**
-- **Application 1** : Marwa Kime, Frédéric Gobfert (Karadoc)
+- **Application 1** : Marwa Kime (Mapbaya), Frédéric Gobfert (Karadoc)
 - **Application 2** : Neda Khelifi, Mathys Levitre
 
 **Encadrement** : L. Conoir (responsable), R. Cozot, J. Hermilier
