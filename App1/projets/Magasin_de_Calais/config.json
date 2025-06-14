@@ -15,6 +15,25 @@
             "Boulgour",
             "Anchois",
             "Bolognaise"
+        ],
+        "J5": [
+            "Aubergine",
+            "Avocat",
+            "Betterave"
+        ],
+        "I6": [
+            "Ail",
+            "Artichaut",
+            "Asperges",
+            "Brocolis",
+            "Carotte"
+        ],
+        "K7": [
+            "Blette",
+            "Céleri",
+            "Champignons",
+            "Champignons chinois",
+            "Chou"
         ]
     }
 }

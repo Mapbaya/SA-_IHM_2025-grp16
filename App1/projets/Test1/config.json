@@ -9,7 +9,11 @@
             "Gel douche"
         ],
         "I5": [
-            "Abricots"
+            "Aubergine",
+            "Betterave",
+            "Choucroute",
+            "Chou-rouge",
+            "Ciboulette"
         ],
         "J15": [
             "Figues sèches",
@@ -92,6 +96,24 @@
             "Avocat",
             "Blette",
             "Champignons chinois"
+        ],
+        "J5": [
+            "Brocolis",
+            "Chou"
+        ],
+        "J6": [
+            "Chou-fleur",
+            "Citrouille",
+            "Coeur de palmier",
+            "Concombre"
+        ],
+        "A14": [
+            "Biscuits salés",
+            "Blinis mini"
+        ],
+        "E4": [
+            "Andouillette",
+            "Bacon"
         ]
     }
 }

@@ -113,8 +113,15 @@ class SelectionProduits(QWidget):
                     # Gestion des produits déjà utilisés
                     if produit in produits_utilises:
                         case_utilisee = self.mon_projet.trouver_case_produit(produit)
-                        item_produit.setFlags(item_produit.flags() & ~Qt.ItemFlag.ItemIsEnabled)
+                        
+                        flags = item_produit.flags()
+                        flags &= ~Qt.ItemFlag.ItemIsUserCheckable  # empêche de cocher
+                        flags &= ~Qt.ItemFlag.ItemIsSelectable     # empêche la sélection
+                        # flags &= ~Qt.ItemFlag.ItemIsEnabled      # ne pas désactiver complètement
+                        item_produit.setFlags(flags)
+
                         item_produit.setText(0, f"{produit} (utilisé en {case_utilisee})")
+                        item_produit.setToolTip(0, f"Produit déjà placé dans la case {case_utilisee}")
                     else:
                         item_produit.setFlags(item_produit.flags() | Qt.ItemFlag.ItemIsEnabled | Qt.ItemFlag.ItemIsUserCheckable)
                         item_produit.setCheckState(0, Qt.CheckState.Unchecked)
@@ -284,8 +291,8 @@ class SelectionProduits(QWidget):
             case_utilisee = self.mon_projet.trouver_case_produit(nom_produit)
             if case_utilisee and case_utilisee != self.ma_case:
                 item.setCheckState(0, Qt.CheckState.Unchecked)
-                QMessageBox.warning(self, "Produit déjà attribué",
-                    f"Le produit '{nom_produit}' est déjà présent en zone {case_utilisee}")
+                # QMessageBox.warning(self, "Produit déjà attribué",
+                #     f"Le produit '{nom_produit}' est déjà présent en zone {case_utilisee}")
                 return
             
         # Compte le nombre de produits actuellement sélectionnés
